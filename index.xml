@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/</link>
+    <description>Recent content on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 30 May 2020 21:59:57 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux中病毒后的处理过程</title>
+      <link>http://starifly.github.io/post/draft/virus-process-in-linux-system/</link>
+      <pubDate>Sat, 30 May 2020 21:59:57 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/draft/virus-process-in-linux-system/</guid>
+      <description>之前一台 centos 虚拟机中毒，导致CPU飙升，这里记录下处理过程。 查找可疑进程 执行命令ll /proc/ID/exe，通过进程ID确定其执行路径，先删</description>
+    </item>
+    
+    <item>
+      <title>一个“蝇量级” C 语言协程库</title>
+      <link>http://starifly.github.io/post/a-c-coroutine/</link>
+      <pubDate>Sun, 02 Sep 2018 19:35:16 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/a-c-coroutine/</guid>
+      <description>本文为转载文章， 原文地址 https://coolshell.cn/articles/10975.html （感谢网友 @我的上铺叫路遥 投稿） 协程 (coroutine) 顾名思义就是“协作的例程”（co-operative routines）。跟具</description>
+    </item>
+    
+    <item>
+      <title>Git分支管理</title>
+      <link>http://starifly.github.io/post/git-branch/</link>
+      <pubDate>Thu, 30 Aug 2018 21:48:45 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-branch/</guid>
+      <description>git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。</description>
+    </item>
+    
+    <item>
+      <title>Git的撤销更改</title>
+      <link>http://starifly.github.io/post/git-reset/</link>
+      <pubDate>Wed, 29 Aug 2018 13:20:00 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-reset/</guid>
+      <description>&lt;p&gt;前文《&lt;a href=&#34;https://starifly.github.io/post/git-base/&#34; target=&#34;_blank&#34;&gt;Git基本操作&lt;/a&gt;》介绍了Git的基本概念和一些基本操作。&lt;/p&gt;
+
+&lt;p&gt;本文将介绍Git四个阶段的撤销更改：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;工作区的代码撤销&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;add到暂存区的代码想撤销&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;提交到本地仓库的代码想撤销&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;推送到远程仓库的代码想撤销&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git基本操作</title>
+      <link>http://starifly.github.io/post/git-base/</link>
+      <pubDate>Sat, 25 Aug 2018 22:16:03 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-base/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://starifly.github.io/images/git-base.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>git add -A 和 git add . 的区别</title>
+      <link>http://starifly.github.io/post/git-add-difference/</link>
+      <pubDate>Thu, 23 Aug 2018 20:18:10 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-add-difference/</guid>
+      <description>&lt;p&gt;git add -A、git add .和git add -u在功能上看似相近，但是有细微的差别，而且功能会随着git版本的不同而不同。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>http://starifly.github.io/about/</link>
+      <pubDate>Sat, 18 Aug 2018 15:55:18 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/about/</guid>
+      <description>关于本站 I decide to publish things which are interesting to me, problem solutions, and another stuff. There are several aims for that. Firstly, it should help me to structure various information which i collected during work and study. Secondly, it&amp;rsquo;s a good chance to train my writing skills. And thirdly, it could be helpful for someone else. 链接 Github: https://github.com/starifly/</description>
+    </item>
+    
+    <item>
+      <title>日常记录</title>
+      <link>http://starifly.github.io/daily-notes/</link>
+      <pubDate>Sat, 18 Aug 2018 15:48:56 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/daily-notes/</guid>
+      <description>keep</description>
+    </item>
+    
+    <item>
+      <title>使用Webhook和Github实现hugo的自动部署</title>
+      <link>http://starifly.github.io/post/webhook-github-autodeploy/</link>
+      <pubDate>Sat, 18 Aug 2018 12:18:32 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/webhook-github-autodeploy/</guid>
+      <description>&lt;p&gt;之前&lt;a href=&#34;https://itlaws.cn/post/hugo-caddy-autodeplay/&#34; target=&#34;_blank&#34;&gt;《通过github和caddy实现hugo的自动部署》&lt;/a&gt;，使用的是 caddy 的 http.git 插件。最近发现，那方法不管用了，不知道原因。&lt;/p&gt;
+
+&lt;p&gt;所以决定使用传统的 webhook 。原理是：在 vps 运行 webhook 监听程序，github 收到 push 事件后，&lt;/p&gt;
+
+&lt;p&gt;就通知该监听程序，由该监听程序执行相应的命令。现在记录一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hugo 自动化部署脚本</title>
+      <link>http://starifly.github.io/post/hugo-deploy-script/</link>
+      <pubDate>Sat, 18 Aug 2018 12:01:32 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/hugo-deploy-script/</guid>
+      <description>&lt;p&gt;之前我写了一个脚本用来自动部署我的 Hugo 博客，今天闲来无事完善了一下这个脚本，使这个脚本更加通用一些。&lt;/p&gt;
+
+&lt;p&gt;脚本路径：&lt;a href=&#34;https://github.com/coderzh/coderzh-hugo-blog/blob/master/deploy.py&#34; target=&#34;_blank&#34;&gt;https://github.com/coderzh/coderzh-hugo-blog/blob/master/deploy.py&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim Tips</title>
+      <link>http://starifly.github.io/post/vim-tips/</link>
+      <pubDate>Fri, 17 Aug 2018 21:15:03 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/vim-tips/</guid>
+      <description>&lt;p&gt;Vim Tips.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一套交叉编译脚本</title>
+      <link>http://starifly.github.io/post/a-promising-cross-compile-framework/</link>
+      <pubDate>Fri, 17 Aug 2018 17:04:47 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/a-promising-cross-compile-framework/</guid>
+      <description>&lt;p&gt;现在移动平台非常火热，我们在使用C/C++开发一些移动应用的时候，经常可能需要将一些第三方c/c++库编译成对应的iOS/Android/WP/Tizen上面的静态库。
+之前我介绍过&lt;a href=&#34;http://zilongshanren.com/blog/2014-09-01-how-to-use-cmake-to-compile-static-library.html&#34; target=&#34;_blank&#34;&gt;如何使用CMake来编译跨平台库&lt;/a&gt;。
+那种方法有一个局限性，它只针对一些提供了CMake支持或者源码本身不需要configure的库来说，使用会非常方便，但是如果库本身没有提供CMake或者
+在编译之前需要configure的库，使用起来就会很麻烦了。最好的做法，其实是重用它本身提供的编译系统，然后提供交叉编译所需要的一些参数即可。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用CMake编译跨平台静态库</title>
+      <link>http://starifly.github.io/post/how-to-use-cmake-to-compile-static-library/</link>
+      <pubDate>Fri, 17 Aug 2018 16:57:13 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/how-to-use-cmake-to-compile-static-library/</guid>
+      <description>&lt;p&gt;在开始介绍如何使用CMake编译跨平台的静态库之前，先讲讲我在没有使用CMake之前所趟过的坑。因为很多开源的程序，比如png，都是自带编译脚本的。我们可以使用下列脚本来进行编译：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;configure&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;prefix&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;xxx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;xx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;enable&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;static&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;YES&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;make&lt;/span&gt; 
+&lt;span class=&#34;n&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;相信手动在类Unix系统上面编译过开源程序的同学对上面的命令肯定非常熟悉。但是，如果不配置编译器和一些编译、链接参数，这样的操作，最后编译出来的静态库只能在本系统上面被链接使用。比如你在mac上面运行上面的命令，编译出来的静态库就只能给mac程序链接使用。如果在Linux上面运行上述命令，则也只能给Linux上面的程序所链接使用。如果我们想要在Mac上面编译出ios和android的静态库，就必须要用到交叉编译。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Learning Something</title>
+      <link>http://starifly.github.io/post/learning-something/</link>
+      <pubDate>Fri, 17 Aug 2018 15:51:10 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/learning-something/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://zilongshanren.com/blog/2017-05-09-learning-how-to-learn.html&#34; target=&#34;_blank&#34;&gt;Learning How to Learn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.xianmin.org/post/read-peak/&#34; target=&#34;_blank&#34;&gt;关于编程的练习方法——读《刻意练习》有感&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.xianmin.org/post/read-how-to-read-a-book/&#34; target=&#34;_blank&#34;&gt;《如何阅读一本书》阅读笔记&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zilongshanren.com/blog/2015-10-14-pesudo-perfect-workflow.html&#34; target=&#34;_blank&#34;&gt;工作流&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.xianmin.org/post/note-opensource-project/&#34; target=&#34;_blank&#34;&gt;笔记：有关开源项目&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>为 Github Pages 自定义域名博客开启 HTTPS</title>
+      <link>http://starifly.github.io/post/using-https-with-custom-domain-name-on-github-pages/</link>
+      <pubDate>Fri, 17 Aug 2018 12:11:32 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/using-https-with-custom-domain-name-on-github-pages/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;这是转载文章。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;为什么要使用-https-协议呢&#34;&gt;为什么要使用 HTTPS 协议呢？&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在浏览器和网站之间提供更安全的通讯&lt;/li&gt;
+&lt;li&gt;HTTPS 比 HTTP 的速度更快&lt;/li&gt;
+&lt;li&gt;能提高搜索引擎的优化排名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;HTTPS 协议的网站在地址栏前会有绿色锁的图标，感觉有点逼格，就冲着这点，果断 HTTPS 走起。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Github Pages 本身支持 HTTPS，但仅支持 &lt;code&gt;github.io&lt;/code&gt; 域名。如果绑定了自己的域名，就不支持 HTTPS 了。幸运的是，CloudFlare 提供免费的启用 HTTPS 的解决方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>无比强大的 Alfred Workflow</title>
+      <link>http://starifly.github.io/post/alfred-workflow/</link>
+      <pubDate>Fri, 17 Aug 2018 11:58:38 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/alfred-workflow/</guid>
+      <description>这是一篇非常有价值，里面的每一个都非常值得大家实践。 Alfred workflow 的详细说明，我就不再赘述了，大家可以直接看最后的参考资料，我把我在用的 Alfred workflow 列一下，以</description>
+    </item>
+    
+    <item>
+      <title>Linux 中 profile，bashrc，bash_profile等的区别</title>
+      <link>http://starifly.github.io/post/profile-bashrc-bash_profile-in-linux/</link>
+      <pubDate>Fri, 17 Aug 2018 11:52:00 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/profile-bashrc-bash_profile-in-linux/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;这是一篇有关环境变量加载的入门介绍（不太确定）。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/profile&lt;/code&gt;: 此文件为系统的每个用户设置环境信息，当用户第一次登录时，该文件被执行。并从 &lt;code&gt;/etc/profile.d&lt;/code&gt; 目录的配置文件中收集 shell 的设置。如果你有对 &lt;code&gt;/etc/profile&lt;/code&gt; 有修改的话必须得 source 一下 你的修改才会生效，此修改对*每个用户*都生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/bashrc&lt;/code&gt;: 为每一个运行 bash shell 的用户执行此文件。当 bash shell 被打开时，该文件被读取。如果你想对所有的使用 bash 的用户修改某个配置并在以后打开的 bash 都生效的话可以修改这个文件，修改这个文件不用重启，重新打开一个 bash 即可生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.bash_profile&lt;/code&gt;: 每个用户都可使用该文件输入专用于自己使用的 shell 信息，当用户登录时，该文件仅仅执行一次!默认情况下,他设置一些环境变量，执行用户的 .bashrc 文件。
+此文件类似于 &lt;code&gt;/etc/profile&lt;/code&gt;，也是需要需要 source 才会生效，&lt;code&gt;/etc/profile&lt;/code&gt; 对所有用户生效，&lt;code&gt;~/.bash_profile&lt;/code&gt; 只对当前用户生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.bashrc&lt;/code&gt;: 该文件包含专用于你的 bash shell 的 bash 信息，当登录时以及每次打开新的 shell 时，该文件被读取。（每个用户都有一个 &lt;code&gt;.bashrc&lt;/code&gt; 文件，在用户目录下）
+此文件类似于 &lt;code&gt;/etc/bashrc&lt;/code&gt;，不需要重启就可以生效，重新打开一个 bash 即可生效，&lt;code&gt;/etc/bashrc&lt;/code&gt; 对所有用户新打开的 bash 都生效，但 &lt;code&gt;~/.bashrc&lt;/code&gt; 只对当前用户新打开的 bash 生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.bash_logout&lt;/code&gt;: 当每次退出系统(退出 bash shell)时，执行该文件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一分钟告诉你究竟DevOps是什么鬼？</title>
+      <link>http://starifly.github.io/post/what-the-hell-is-DevOps/</link>
+      <pubDate>Thu, 16 Aug 2018 21:25:53 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/what-the-hell-is-DevOps/</guid>
+      <description>&lt;h1 id=&#34;一分钟告诉你究竟devops是什么鬼-https-www-cnblogs-com-jetzhang-p-6068773-html&#34;&gt;&lt;a href=&#34;https://www.cnblogs.com/jetzhang/p/6068773.html&#34; target=&#34;_blank&#34;&gt;一分钟告诉你究竟DevOps是什么鬼？&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://www.uml.org.cn/SoftWareProcess/images/2015122311.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>通过webhook将Hugo自动部署至GitHub Pages和GitCafe Pages</title>
+      <link>http://starifly.github.io/post/use-webhook-automated-deploy-hugo/</link>
+      <pubDate>Thu, 16 Aug 2018 21:13:08 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/use-webhook-automated-deploy-hugo/</guid>
+      <description>&lt;p&gt;本文的主要内容如标题所示，通过webhook将Hugo自动部署至GitHub Pages和GitCafe Pages。如果你正好有这个需求，看这篇文章正好，可以节省你不少时间。如果不是，了解一下也无妨。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用flv.js做直播</title>
+      <link>http://starifly.github.io/post/live-streaming-with-flv/</link>
+      <pubDate>Thu, 16 Aug 2018 18:31:24 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/live-streaming-with-flv/</guid>
+      <description>&lt;p&gt;为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。&lt;/p&gt;
+
+&lt;p&gt;在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些&lt;a href=&#34;https://github.com/gwuhaolin/blog/issues/5&#34; target=&#34;_blank&#34;&gt;基础概念&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>音视频技术参考资料</title>
+      <link>http://starifly.github.io/post/audio-video-tech-references/</link>
+      <pubDate>Thu, 16 Aug 2018 11:41:15 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/audio-video-tech-references/</guid>
+      <description>&lt;h2 id=&#34;入门与概念&#34;&gt;入门与概念&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020/article/details/18893769&#34; target=&#34;_blank&#34;&gt;[总结]视音频编解码技术零基础学习方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ruoxu.me/yin-shi-pin-qi-fa&#34; target=&#34;_blank&#34;&gt;入门启发：音视频的简单理解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wuyuans.com/2012/01/video_encode_frame&#34; target=&#34;_blank&#34;&gt;视频编码基础&amp;ndash;帧的类型&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;容器格式&#34;&gt;容器格式&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020/article/details/17934487&#34; target=&#34;_blank&#34;&gt;视音频编解码学习工程：FLV封装格式分析器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;传输协议&#34;&gt;传输协议&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://chenlichao.gitbooks.io/rtmp-zh_cn/content/1-introduction.html&#34; target=&#34;_blank&#34;&gt;RTMP协议规范&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://mingyangshang.github.io/2016/03/06/RTMP协议/&#34; target=&#34;_blank&#34;&gt;带你吃透RTMP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/win_lin/article/details/12615591&#34; target=&#34;_blank&#34;&gt;RTMP服务器的延迟，多级边缘不影响延迟，gop为最大因素&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;编解码&#34;&gt;编解码&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>可移植的 Makefile 教程</title>
+      <link>http://starifly.github.io/post/portable-Makefile-tutorial/</link>
+      <pubDate>Thu, 16 Aug 2018 10:57:09 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/portable-Makefile-tutorial/</guid>
+      <description>&lt;p&gt;在我写 Makefile 的头 10 年里，我养成了一个非常不好的习惯&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash; 完全严格使用 GNU Make 的扩展名。过去我并不知道， GNU Make 与 POSIX 所保证的可移植特性之间的区别与联系。通常情况，它并不十分重要，但是当在非 Linux 系统上进行构建时，比如在各种 BSD 系统上，就会变成一件麻烦事儿。我不得不指定安装 GNU Make，然后在心里记住不要使用系统自带的 make ，而是使用 gmake 这样的工具来调用它。&lt;/p&gt;
+
+&lt;p&gt;我已经对 &lt;a href=&#34;https://link.jianshu.com?t=http://pubs.opengroup.org/onlinepubs/009695399/utilities/make.html&#34; target=&#34;_blank&#34;&gt;make 官方规范&lt;/a&gt; 十分熟悉，并且在过去的一年，我都在严格要求自己编写可移植的 Makefile。现在，我的构建不仅可以在各种类 unix 的系统之间进行移植，而且 Makefile 看起来更清晰与健壮。许多常见的 make 扩展名 &amp;ndash; 尤其是条件判断 &amp;ndash; 会导致不够健壮的却又复杂的 Makefile, 因此最好避免这些情况。能够确信你的构建系统能够各司其职，正常工作是非常重要的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;本指南不仅适用于之前从来没有写过 Makefile 的 make 初学者，同样适用于想要学习如何写出可移植 Makefile 的资深开发者。&lt;/strong&gt; 但不管怎样，为了能够理解文中的示例，你必须首先对命令行（编译器，链接器，目标文件等等）构建程序的常规步骤十分熟悉。我不会建议使用任何花哨的技巧，也不会提供任何标准的初学者模板。当项目不大的时候，Makefile 应该是相当的简单，并且随着项目的成长，以一种可预见，清晰的方式不断丰富。&lt;/p&gt;
+
+&lt;p&gt;我不会覆盖 make 的每一个特性。如果想要学习所有完整的内容，你需要自行阅读它的规范。本指南将会详细讨论一些重要特性和约定俗成的规定。遵守已有的约定是非常重要的，这样使用你的 Makefile 的其他人，才能知道它能够完成和如何完成一些基本的任务。&lt;/p&gt;
+
+&lt;p&gt;如果你的系统是 Debian, 或是基于 Debian 的系统，比如 Ubuntu，&lt;code&gt;bmake&lt;/code&gt; 和 &lt;code&gt;freebsd-buildutils&lt;/code&gt; 包将会分别提供 &lt;code&gt;bmake&lt;/code&gt; 和 &lt;code&gt;fmake&lt;/code&gt; 程序。这些可供选择的 make 实现，对于测试 Makefile 的可移植性十分有用，尤其是当你不小心使用了 GNU Make 的特性。虽然每个实现都实现了与 GNU Make 完全相同的一些扩展，但是它会捕获一些常见的错误。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用 CMake 不用路径地调用 libclang</title>
+      <link>http://starifly.github.io/post/CMake-clang/</link>
+      <pubDate>Thu, 16 Aug 2018 10:36:02 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/CMake-clang/</guid>
+      <description>作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、</description>
+    </item>
+    
+    <item>
+      <title>持续集成教程 1 通识科普</title>
+      <link>http://starifly.github.io/post/Travis-basis/</link>
+      <pubDate>Thu, 16 Aug 2018 10:24:28 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/Travis-basis/</guid>
+      <description>&lt;p&gt;本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。
+这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。&lt;/p&gt;
+
+&lt;h2 id=&#34;ci-能做啥&#34;&gt;CI 能做啥&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;能帮你在云端自动编译项目&lt;/li&gt;
+&lt;li&gt;每次你推送代码就会触发编译&lt;/li&gt;
+&lt;li&gt;可以保留编译生成的目标文件&lt;/li&gt;
+&lt;li&gt;自动上传 release&lt;/li&gt;
+&lt;li&gt;编译失败发邮件提醒你&lt;/li&gt;
+&lt;li&gt;编译失败发 Slack 消息提醒你&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;等等功能（这些都是最基本的）&lt;/p&gt;
+
+&lt;p&gt;混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等，
+公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器）
+当然做 CI 就超级简单了。&lt;/p&gt;
+
+&lt;p&gt;但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。&lt;/p&gt;
+
+&lt;p&gt;理由： Linux + 自动部署&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>为 Markdown 生成 TOC 的 Vim 插件</title>
+      <link>http://starifly.github.io/post/vim-markdown-toc/</link>
+      <pubDate>Wed, 15 Aug 2018 22:31:38 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/vim-markdown-toc/</guid>
+      <description>因为饱受 GFM 和 Redcarpet 两种 Markdown 引擎生成 TOC 链接的差异的折磨，而我又不得不同时使用它们——博客基于 Jekyll 使用 Redcarpet（*Update 2016/09/16: GitHub Pages 现在已经改</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 使用笔记</title>
+      <link>http://starifly.github.io/post/use-ubuntu-notes/</link>
+      <pubDate>Wed, 15 Aug 2018 22:25:03 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/use-ubuntu-notes/</guid>
+      <description>&lt;p&gt;使用 Ubuntu 过程中遇到的问题及解决方案。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git 和 GitHub简易入门</title>
+      <link>http://starifly.github.io/post/git-intro/</link>
+      <pubDate>Wed, 15 Aug 2018 21:51:39 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-intro/</guid>
+      <description>开始 拖延症与强迫症严重一直拖到了今天2月23号才开始写。这一段时间我也明白了博客最重要的是keep blogging,所以 想到什么就写什么，没</description>
+    </item>
+    
+    <item>
+      <title>关于 Markdown 的一些奇技淫巧</title>
+      <link>http://starifly.github.io/post/markdown-odd-skills/</link>
+      <pubDate>Wed, 15 Aug 2018 15:35:40 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/markdown-odd-skills/</guid>
+      <description>&lt;p&gt;自从几年前开始在 GitHub 玩耍，接触到 Markdown 之后，就一发不可收拾，在各种文档编辑上，有条件用 Markdown 的尽量用，不能用的创造条件也要用——README、博客、公众号、接口文档等等全都是，比如当前这篇文章就是用 Markdown 编辑而成。&lt;/p&gt;
+
+&lt;p&gt;这几年也发现越来越多的网站和程序提供了对 Markdown 的支持，从最初接触的 GitHub、Jekyll，到简书、掘金、CSDN 等等，由此也从别人做得好的文档中，学到了一些『奇技淫巧』，所以本文不是对 Markdown 基础语法的介绍，而是一些相对高级、能将 Markdown 玩出更多花样的小技巧。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;注：如下技巧大多是利用 Markdown 兼容部分 HTML 标签的特性来完成，不一定在所有网站和软件里都完全支持，主要以 GitHub 支持为准。&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>http://starifly.github.io/post/my-first-post/</link>
+      <pubDate>Wed, 15 Aug 2018 14:33:35 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/my-first-post/</guid>
+      <description>Hello world！测试内容</description>
+    </item>
+    
+  </channel>
+</rss>

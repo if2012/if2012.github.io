@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用flv.js做直播 - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="浩麟" /><meta name="description" content="为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。
+在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。 如果你看的很吃力可以先了解下音视频技术的一些基础概念。
+" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/live-streaming-with-flv/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="使用flv.js做直播" />
+<meta property="og:description" content="为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。
+
+在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些基础概念。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/live-streaming-with-flv/" />
+<meta property="article:published_time" content="2018-08-16T18:31:24+08:00" />
+<meta property="article:modified_time" content="2018-08-19T00:00:00+00:00" />
+<meta itemprop="name" content="使用flv.js做直播">
+<meta itemprop="description" content="为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。
+
+在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些基础概念。">
+
+
+<meta itemprop="datePublished" content="2018-08-16T18:31:24&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2607">
+
+
+
+<meta itemprop="keywords" content="音视频," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用flv.js做直播"/>
+<meta name="twitter:description" content="为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。
+
+在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些基础概念。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用flv.js做直播</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"> 音视频 </a>
+            </div>
+          <span class="more-meta"> 约 2607 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#常见直播协议">常见直播协议</a>
+<ul>
+<li>
+<ul>
+<li><a href="#常见直播协议延迟与性能数据-sub-sup-以下数据只做对比参考-sup-sub">常见直播协议延迟与性能数据<sub><sup>以下数据只做对比参考</sup></sub></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#flv-js-简介">flv.js 简介</a></li>
+<li><a href="#flv-js-优势">flv.js 优势</a></li>
+<li><a href="#flv-js-限制">flv.js 限制</a>
+<ul>
+<li>
+<ul>
+<li><a href="#flv-js依赖的浏览器特性兼容列表">flv.js依赖的浏览器特性兼容列表</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#flv-js-原理">flv.js 原理</a></li>
+<li><a href="#flv-js兼容方案">flv.js兼容方案</a>
+<ul>
+<li>
+<ul>
+<li><a href="#pc端">PC端</a></li>
+<li><a href="#移动端">移动端</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#flv-js实战">flv.js实战</a>
+<ul>
+<li>
+<ul>
+<li><a href="#搭建音视频服务">搭建音视频服务</a></li>
+<li><a href="#实现播放页">实现播放页</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#flv-js延迟优化">flv.js延迟优化</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。</p>
+
+<p>在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些<a href="https://github.com/gwuhaolin/blog/issues/5" target="_blank">基础概念</a>。</p>
+
+<h2 id="常见直播协议">常见直播协议</h2>
+
+<ul>
+<li><strong>RTMP</strong>: 底层基于<code>TCP</code>，在浏览器端依赖Flash。</li>
+<li><strong>HTTP-FLV</strong>: 基于<code>HTTP</code>流式IO传输FLV，依赖浏览器支持播放FLV。</li>
+<li><strong>WebSocket-FLV</strong>: 基于<code>WebSocket</code>传输FLV，依赖浏览器支持播放FLV。<code>WebSocket</code>建立在<code>HTTP</code>之上，建立<code>WebSocket</code>连接前还要先建立<code>HTTP</code>连接。</li>
+<li><strong>HLS</strong>: Http Live Streaming，苹果提出基于<code>HTTP</code>的流媒体传输协议。<code>HTML5</code>可以直接打开播放。</li>
+<li><strong>RTP</strong>: 基于<code>UDP</code>，延迟1秒，浏览器不支持。</li>
+</ul>
+
+<h4 id="常见直播协议延迟与性能数据-sub-sup-以下数据只做对比参考-sup-sub">常见直播协议延迟与性能数据<sub><sup>以下数据只做对比参考</sup></sub></h4>
+
+<table>
+<thead>
+<tr>
+<th>传输协议</th>
+<th>播放器</th>
+<th>延迟</th>
+<th>内存</th>
+<th>CPU</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>RTMP</td>
+<td>Flash</td>
+<td>1s</td>
+<td>430M</td>
+<td>11%</td>
+</tr>
+
+<tr>
+<td>HTTP-FLV</td>
+<td>Video</td>
+<td>1s</td>
+<td>310M</td>
+<td>4.4%</td>
+</tr>
+
+<tr>
+<td>HLS</td>
+<td>Video</td>
+<td>20s</td>
+<td>205M</td>
+<td>3%</td>
+</tr>
+</tbody>
+</table>
+
+<p>在支持浏览器的协议里，延迟排序是：
+<strong>RTMP = HTTP-FLV = WebSocket-FLV  &lt; HLS</strong>
+而性能排序恰好相反：
+<strong>RTMP &gt; HTTP-FLV = WebSocket-FLV  &gt; HLS</strong>
+也就是说延迟小的性能不好。</p>
+
+<p>可以看出在浏览器里做直播，使用HTTP-FLV协议是不错的，性能优于RTMP+Flash，延迟可以做到和RTMP+Flash一样甚至更好。</p>
+
+<h2 id="flv-js-简介">flv.js 简介</h2>
+
+<p>flv.js是来自Bilibli的开源项目。它解析FLV文件喂给原生HTML5 Video标签播放音视频数据，使浏览器在不借助Flash的情况下播放FLV成为可能。</p>
+
+<h2 id="flv-js-优势">flv.js 优势</h2>
+
+<ul>
+<li>由于浏览器对原生Video标签采用了硬件加速，性能很好，支持高清。</li>
+<li>同时支持录播和直播</li>
+<li>去掉对Flash的依赖</li>
+</ul>
+
+<h2 id="flv-js-限制">flv.js 限制</h2>
+
+<ul>
+<li>FLV里所包含的视频编码必须是<code>H.264</code>，音频编码必须是<code>AAC</code>或<code>MP3</code>， IE11和Edge浏览器不支持MP3音频编码，所以FLV里采用的编码最好是H.264+AAC，这个让音视频服务兼容不是问题。</li>
+<li>对于录播，依赖 <code>原生HTML5 Video标签</code> 和 <a href="https://w3c.github.io/media-source/" target="_blank">Media Source Extensions</a> API</li>
+<li>对于直播，依赖录播所需要的播放技术，同时依赖 <code>HTTP FLV</code> 或者 <code>WebSocket</code> 中的一种协议来传输FLV。其中<code>HTTP FLV</code>需通过流式IO去拉取数据，支持流式IO的有<a href="https://fetch.spec.whatwg.org" target="_blank">fetch</a>或者<a href="https://streams.spec.whatwg.org" target="_blank">stream</a></li>
+<li><code>flv.min.js</code> 文件大小 164Kb，gzip后 35.5Kb，flash播放器gzip后差不多也是这么大。</li>
+<li>由于依赖<code>Media Source Extensions</code>，目前所有iOS和Android4.4.4以下里的浏览器都不支持，也就是说目前对于移动端flv.js基本是不能用的。</li>
+</ul>
+
+<h4 id="flv-js依赖的浏览器特性兼容列表">flv.js依赖的浏览器特性兼容列表</h4>
+
+<ul>
+<li><a href="http://caniuse.com/#feat=webm" target="_blank">HTML5 Video</a></li>
+<li><a href="http://caniuse.com/#feat=mediasource" target="_blank">Media Source Extensions</a></li>
+<li><a href="http://caniuse.com/#feat=websockets" target="_blank">WebSocket</a></li>
+
+<li><p>HTTP FLV: <a href="http://caniuse.com/#feat=fetch" target="_blank">fetch</a> 或 <a href="http://caniuse.com/#feat=http-live-streaming" target="_blank">stream</a></p>
+
+<h2 id="flv-js-原理">flv.js 原理</h2>
+
+<p>flv.js只做了一件事，在获取到FLV格式的音视频数据后通过原生的JS去解码FLV数据，再通过<a href="https://w3c.github.io/media-source/" target="_blank">Media Source Extensions</a> API 喂给原生HTML5 Video标签。(HTML5 原生仅支持播放 mp4/webm 格式，不支持 FLV)</p></li>
+</ul>
+
+<p>flv.js 为什么要绕一圈，从服务器获取FLV再解码转换后再喂给Video标签呢？原因如下：
+1. 兼容目前的直播方案：目前大多数直播方案的音视频服务都是采用FLV容器格式传输音视频数据。
+2. FLV容器格式相比于MP4格式更加简单，解析起来更快更方便。</p>
+
+<h2 id="flv-js兼容方案">flv.js兼容方案</h2>
+
+<p>由于目前flv.js兼容性还不是很好，要用在产品中必要要兼顾到不支持flv.js的浏览器。兼容方案如下：</p>
+
+<h4 id="pc端">PC端</h4>
+
+<ol>
+<li>优先使用 HTTP-FLV，因为它延迟小，性能也不差1080P都很流畅。</li>
+<li>不支持 flv.js 就使用 Flash播放器播 RTMP 流。Flash兼容性很好，但是性能差默认被很多浏览器禁用。</li>
+
+<li><p>不想用Flash兼容也可以用HLS，但是PC端只有Safari支持HLS</p>
+
+<h4 id="移动端">移动端</h4></li>
+
+<li><p>优先使用 HTTP-FLV，因为它延迟小，支持HTTP-FLV的设备性能运行 flv.js 足够了。</p></li>
+
+<li><p>不支持 flv.js 就使用 HLS，但是 HLS延迟非常大。</p></li>
+
+<li><p>HLS 也不支持就没法直播了，因为移动端都不支持Flash。</p></li>
+</ol>
+
+<h2 id="flv-js实战">flv.js实战</h2>
+
+<p>说了这么多介绍与原理，接下来教大家如何用flv.js搭建一个完整的直播系统。
+我已经搭建好了<a href="http://rawgit.com/gwuhaolin/reflv/gh-pages/live.html" target="_blank">一个demo</a>可以供大家体验。</p>
+
+<h4 id="搭建音视频服务">搭建音视频服务</h4>
+
+<p>主播推流到音视频服务，音视频服务再转发给所有连接的客户端。为了让你快速搭建服务推荐我用go语言实现的<a href="https://github.com/gwuhaolin/livego" target="_blank">livego</a>，因为它可以运行在任何操作系统上，对Golang感兴趣？请看<a href="http://go.wuhaolin.cn/" target="_blank">Golang 中文学习资料汇总</a>。
+1. <a href="https://github.com/gwuhaolin/livego/releases" target="_blank">下载livego</a>，注意选对你的操作系统和位数。
+2. 解压，执行<code>livego</code>，服务就启动好了。它会启动RTMP(1935端口)服务用于主播推流，以及HTTP-FLV(7001端口)服务用于播放。</p>
+
+<h4 id="实现播放页">实现播放页</h4>
+
+<p>在react体系里使用react flv.js 组件<a href="https://github.com/gwuhaolin/reflv" target="_blank">reflv</a> 快速实现。
+先安装<code>npm i reflv</code>，再写代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">PureComponent</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Reflv</span> <span class="nx">from</span> <span class="s1">&#39;reflv&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">class</span> <span class="nx">HttpFlv</span> <span class="k">extends</span> <span class="nx">PureComponent</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Reflv</span>
+        <span class="nx">url</span><span class="o">=</span><span class="p">{</span><span class="sb">`http://localhost:7001/live/test.flv`</span><span class="p">}</span>
+        <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;flv&#34;</span>
+        <span class="nx">isLive</span>
+        <span class="nx">cors</span>
+      <span class="o">/&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>让以上代码在浏览器里运行。这是你还看不到直播，是因为还没有主播推流。
+- 你可以使用<a href="https://obsproject.com" target="_blank">OBS</a>来推流，注意要配置好OBS：
+<img width="961" alt="screen shot 2017-06-07 at 5 41 32 pm" src="https://user-images.githubusercontent.com/5773264/26872300-9c1c5bb4-4ba8-11e7-98eb-98e6d6ba751f.png"></p>
+
+<ul>
+<li>也可以使用<a href="https://ffmpeg.org" target="_blank">ffmpeg</a>来推流，推流命令<code>ffmpeg -f avfoundation -i &quot;0&quot; -vcodec h264 -acodec aac -f flv rtmp://localhost/live/test</code></li>
+</ul>
+
+<h2 id="flv-js延迟优化">flv.js延迟优化</h2>
+
+<p>按照上面的教程运行起来的直播延迟大概有3秒，经过优化可以到1秒。在教你怎么优化前先要介绍下直播运行流程：
+1. 主播端在采集到一段时间的音视频原数据后，因为音视频原数据庞大需要先压缩数据：
+    - 通过H264视频编码压缩数据数据
+    - 通过PCM音频编码压缩音频AAC数据</p>
+
+<ol>
+<li>压缩完后再通过FLV容器格式封装压缩后的数据，封装成一个FLV TAG</li>
+<li>再把FLV TAG通过RTMP协议推流到音视频服务器，音视频服务器再从RTMP协议里解析出FLV TAG。</li>
+<li>音视频服务器再通过HTTP协议通过和浏览器建立的长链接流式把FLV TAG传给浏览器。</li>
+<li>flv.js 获取FLV TAG后解析出压缩后的音视频数据喂给Video播放。</li>
+</ol>
+
+<p>知道流程后我们就知道从哪入手优化了：
+- 主播端采集时收集了一段时间的音视频原数据，它专业的叫法是<a href="http://blog.csdn.net/zqj6893/article/details/50262189" target="_blank">GOP</a>。缩短这个收集时间(也就是减少GOP长度)可以优化延迟，但这样做的坏处是导致视频压缩率不高，传输效率低。
+- 关闭音视频服务器的I桢缓存可以优化延迟，坏处是用户看到直播首屏的时间变大。
+- 减少音视频服务器的buffer可以优化延迟，坏处是音视频服务器处理效率降低。
+- 减少浏览器端flv.js的buffer可以优化延迟，坏处是浏览器端处理效率降低。
+- 浏览器端开启flv.js的Worker，多线程运行flv.js提升解析速度可以优化延迟，这样做的flv.js配置代码是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="p">{</span>
+          <span class="nx">enableWorker</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="nx">enableStashBuffer</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="nx">stashInitialSize</span><span class="o">:</span> <span class="mi">128</span><span class="p">,</span><span class="c1">// 减少首桢显示等待时长
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>这里是<a href="https://github.com/gwuhaolin/reflv/blob/master/doc/live/http-flv.js" target="_blank">优化后的完整代码</a></p>
+
+<p><a href="http://wuhaolin.cn/2017/05/17/%E4%BD%BF%E7%94%A8flv.js%E5%81%9A%E7%9B%B4%E6%92%AD/" target="_blank">阅读原文</a></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">浩麟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/">音视频</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/use-webhook-automated-deploy-hugo/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">通过webhook将Hugo自动部署至GitHub Pages和GitCafe Pages</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/audio-video-tech-references/">
+            <span class="next-text nav-default">音视频技术参考资料</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-16 18:31:24 \x2b0800 \x2b0800',
+        title: '使用flv.js做直播',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>持续集成教程 1 通识科普 - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ice1000" /><meta name="description" content="本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。 这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。
+CI 能做啥  能帮你在云端自动编译项目 每次你推送代码就会触发编译 可以保留编译生成的目标文件 自动上传 release 编译失败发邮件提醒你 编译失败发 Slack 消息提醒你  等等功能（这些都是最基本的）
+混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等， 公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器） 当然做 CI 就超级简单了。
+但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。
+理由： Linux &#43; 自动部署
+" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/Travis-basis/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="持续集成教程 1 通识科普" />
+<meta property="og:description" content="本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。
+这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。
+
+CI 能做啥
+
+
+能帮你在云端自动编译项目
+每次你推送代码就会触发编译
+可以保留编译生成的目标文件
+自动上传 release
+编译失败发邮件提醒你
+编译失败发 Slack 消息提醒你
+
+
+等等功能（这些都是最基本的）
+
+混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等，
+公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器）
+当然做 CI 就超级简单了。
+
+但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。
+
+理由： Linux &#43; 自动部署" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/Travis-basis/" />
+<meta property="article:published_time" content="2018-08-16T10:24:28+08:00" />
+<meta property="article:modified_time" content="2018-08-19T00:00:00+00:00" />
+<meta itemprop="name" content="持续集成教程 1 通识科普">
+<meta itemprop="description" content="本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。
+这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。
+
+CI 能做啥
+
+
+能帮你在云端自动编译项目
+每次你推送代码就会触发编译
+可以保留编译生成的目标文件
+自动上传 release
+编译失败发邮件提醒你
+编译失败发 Slack 消息提醒你
+
+
+等等功能（这些都是最基本的）
+
+混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等，
+公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器）
+当然做 CI 就超级简单了。
+
+但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。
+
+理由： Linux &#43; 自动部署">
+
+
+<meta itemprop="datePublished" content="2018-08-16T10:24:28&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="885">
+
+
+
+<meta itemprop="keywords" content="CI," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="持续集成教程 1 通识科普"/>
+<meta name="twitter:description" content="本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。
+这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。
+
+CI 能做啥
+
+
+能帮你在云端自动编译项目
+每次你推送代码就会触发编译
+可以保留编译生成的目标文件
+自动上传 release
+编译失败发邮件提醒你
+编译失败发 Slack 消息提醒你
+
+
+等等功能（这些都是最基本的）
+
+混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等，
+公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器）
+当然做 CI 就超级简单了。
+
+但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。
+
+理由： Linux &#43; 自动部署"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">持续集成教程 1 通识科普</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/CI/"> CI </a>
+            </div>
+          <span class="more-meta"> 约 885 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#ci-能做啥">CI 能做啥</a></li>
+<li><a href="#getting-started">getting started</a></li>
+<li><a href="#关于自动-release">关于自动 release</a>
+<ul>
+<li><a href="#注意">注意</a></li>
+</ul></li>
+<li><a href="#travis-ci-的缺点">Travis CI 的缺点</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。
+这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。</p>
+
+<h2 id="ci-能做啥">CI 能做啥</h2>
+
+<ul>
+<li>能帮你在云端自动编译项目</li>
+<li>每次你推送代码就会触发编译</li>
+<li>可以保留编译生成的目标文件</li>
+<li>自动上传 release</li>
+<li>编译失败发邮件提醒你</li>
+<li>编译失败发 Slack 消息提醒你</li>
+</ul>
+
+<p>等等功能（这些都是最基本的）</p>
+
+<p>混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等，
+公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器）
+当然做 CI 就超级简单了。</p>
+
+<p>但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。</p>
+
+<p>理由： Linux + 自动部署</p>
+
+<h2 id="getting-started">getting started</h2>
+
+<p>我才懒得写， <a href="https://docs.travis-ci.com/" target="_blank">RTFM</a></p>
+
+<p>流程大概就是先注册 Travis 账号，然后在仓库里面写个配置文件 <code>.travis.yml</code> ，然后在 Travis 网站上选这个项目，
+然后就可以等 build 了。 Travis 提供了一个 build 的 badge ，可以放在 README 里面装逼（雾</p>
+
+<p>可以让 Travis 自动测试，这样可以在别人发 pull request 的时候先通过 CI 的检验， CI 上编译测试通过了再 merge ，
+明显有安全感的多。</p>
+
+<h2 id="关于自动-release">关于自动 release</h2>
+
+<p>就是每次 push 之后它不是会帮你编译吗，你可以让它把目标文件(artifact)上传到 release 里面。</p>
+
+<p>这里推荐先搭建本地的 Travis 环境（就是 Ruby 环境 + <code>gem install travis</code>）然后让它自己配置。</p>
+
+<p>这样不会泄露你的 GitHub Token 。教程见：</p>
+
+<blockquote>
+<p><a href="https://docs.travis-ci.com/user/deployment/releases/#Authenticating-with-an-Oauth-token" target="_blank">RTFM</a></p>
+</blockquote>
+
+<h3 id="注意">注意</h3>
+
+<p>一定要记得加上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span>on<span class="p">:</span><span class="w">
+</span><span class="w">    </span>tags<span class="p">:</span><span class="w"> </span><span class="kc">true</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>否则你每次推送都会收到一个 artifact 。加上之后就只有在创建 release 的时候才会上传。</p>
+
+<p>于是就不需要在 release 的时候再上传目标文件了。</p>
+
+<p>还可以本地 debug build ，然后让 CI 跑 release build ，不需要编译二遍。</p>
+
+<h2 id="travis-ci-的缺点">Travis CI 的缺点</h2>
+
+<ul>
+<li>触发慢</li>
+<li>触发慢</li>
+<li>触发慢</li>
+<li>触发慢</li>
+</ul>
+
+<p>每次 push <a href="https://github.com/ice1000/algo4j" target="_blank">algo4j</a> 后都能感受到 Travis CI 满满的恶意，
+一般得等个一分钟才能看到它开始编译（这是因为需要 <code>sudo</code>）。</p>
+
+<p>不过它编译本身速度还是可以的，还有 CI 上下载各种源啊， clone 各种仓库啊也都是快到没朋友。</p>
+
+<p>我部署了 Flutter 应用就是这样的，我先让 CI clone Flutter ，再编译 Flutter ，再下载 Android SDK ，再安装谷歌支持库，
+再用 Flutter 编译我的项目，整个过程不到 4 分钟。</p>
+
+<p>这个问题在 AppVeyor上得到了很好的解决， AppVeyor 非常非常快(触发和编译都快)，但是它是 Windows 的，而且各种预装的依赖略有些迷醉。
+我自己也在用，而且非常舒服，这里就先不说了。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ice1000</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/CI/">CI</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/CMake-clang/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用 CMake 不用路径地调用 libclang</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/vim-markdown-toc/">
+            <span class="next-text nav-default">为 Markdown 生成 TOC 的 Vim 插件</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-16 10:24:28 \x2b0800 \x2b0800',
+        title: '持续集成教程 1 通识科普',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

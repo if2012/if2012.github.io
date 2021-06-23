@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/categories/github/</link>
+    <description>Recent content in github on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 17 Aug 2018 12:11:32 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/categories/github/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为 Github Pages 自定义域名博客开启 HTTPS</title>
+      <link>http://starifly.github.io/post/using-https-with-custom-domain-name-on-github-pages/</link>
+      <pubDate>Fri, 17 Aug 2018 12:11:32 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/using-https-with-custom-domain-name-on-github-pages/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;这是转载文章。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;为什么要使用-https-协议呢&#34;&gt;为什么要使用 HTTPS 协议呢？&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在浏览器和网站之间提供更安全的通讯&lt;/li&gt;
+&lt;li&gt;HTTPS 比 HTTP 的速度更快&lt;/li&gt;
+&lt;li&gt;能提高搜索引擎的优化排名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;HTTPS 协议的网站在地址栏前会有绿色锁的图标，感觉有点逼格，就冲着这点，果断 HTTPS 走起。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Github Pages 本身支持 HTTPS，但仅支持 &lt;code&gt;github.io&lt;/code&gt; 域名。如果绑定了自己的域名，就不支持 HTTPS 了。幸运的是，CloudFlare 提供免费的启用 HTTPS 的解决方案。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

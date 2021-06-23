@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用 CMake 不用路径地调用 libclang - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ice1000" /><meta name="description" content="作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/CMake-clang/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="使用 CMake 不用路径地调用 libclang" />
+<meta property="og:description" content="作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/CMake-clang/" />
+<meta property="article:published_time" content="2018-08-16T10:36:02+08:00" />
+<meta property="article:modified_time" content="2018-08-16T10:36:02+08:00" />
+<meta itemprop="name" content="使用 CMake 不用路径地调用 libclang">
+<meta itemprop="description" content="作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、">
+
+
+<meta itemprop="datePublished" content="2018-08-16T10:36:02&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-16T10:36:02&#43;08:00" />
+<meta itemprop="wordCount" content="1841">
+
+
+
+<meta itemprop="keywords" content="cmake,clang," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 CMake 不用路径地调用 libclang"/>
+<meta name="twitter:description" content="作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用 CMake 不用路径地调用 libclang</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/cmake/"> cmake </a>
+            </div>
+          <span class="more-meta"> 约 1841 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、或者给别人用的时候都方便的多。</p>
+
+<p>如果有 gradle, pip, gem, maven, sbt 这类基于包的构建工具的话，这根本就不是问题。别人写的依赖可以在远端调用，自己写的依赖也可以本地调用。<br />
+如果有 npm, go get 这类基于版本控制的构建工具的话，这当作也只有一个小问题，就是项目维护者脑抽了一下，可能就会误伤在此期间构建程序的程序员。</p>
+
+<p>不过至少他们都能自主寻找包并下载安装，只要包是正确的就能成功安装，安装的配置是由包的开发者提供的。</p>
+
+<p>CMake 作为全宇宙 <code>用户量 / 构建工具本身的质量</code> 最高的构建工具，要做到这一点是很困难的 —— CMake 只有在『没有需要导入的依赖』或者『所有依赖都是系统自带的（比如在 Windows 上调用 DirectX）』情况下能做到『无痛使用』。
+一旦需要导入一些外部依赖（比如 <code>glfw3</code>，比如 <code>jni</code>），就需要用到 <code>find_package</code> 这个函数，which 只有满足这两个条件的时候才能成功执行：</p>
+
+<ul>
+<li>CMake 能找到 <code>[package名]Config.cmake</code> 或者 <code>[package名]-config.cmake</code> 中的一个文件</li>
+<li>CMake 能找到 <code>Find[package名].cmake</code> 这个文件，并且这个文件里的代码能 find 到这个 package</li>
+</ul>
+
+<p>之前在写 JNI 代码的时候需要使用 CMake 寻找 <code>jni.h</code> 等一系列文件，于是只需要这么一小段代码就可以把他们加进 CMake 编译时的 classpath:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="nb">find_package</span><span class="p">(</span><span class="s">Java</span> <span class="s">REQUIRED</span><span class="p">)</span><span class="err">
+</span><span class="err"></span><span class="nb">find_package</span><span class="p">(</span><span class="s">JNI</span> <span class="s">REQUIRED</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>然后我们可以在找到之后输出一下找到的 JDK 的路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">if</span> <span class="p">(</span><span class="n">JNI_FOUND</span><span class="p">)</span>
+	<span class="n">message</span><span class="p">(</span><span class="n">STATUS</span> <span class="s">&#34;JNI_INCLUDE_DIRS=${JNI_INCLUDE_DIRS}&#34;</span><span class="p">)</span>
+	<span class="n">message</span><span class="p">(</span><span class="n">STATUS</span> <span class="s">&#34;JNI_LIBRARIES=${JNI_LIBRARIES}&#34;</span><span class="p">)</span>
+<span class="n">endif</span> <span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>但如果我们要调用 <code>libclang</code> 的时候:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="nb">find_package</span><span class="p">(</span><span class="s">LibClang</span> <span class="s">REQUIRED</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>它就会说找不到 <code>LibClangConfig.cmake</code>, <code>LibClang-config.cmake</code>, <code>FindLibClang.cmake</code> 中的一个。</p>
+
+<p>首先确保已经安装 clang:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt install clang-dev</code></pre></td></tr></table>
+</div>
+</div>
+<p>在这个时候我已经上 Google/StackOverflow 找了一遍了，由于 <code>clang</code> 这个名词的特殊性（不仅是个包，还是个 C++ 编译器），搜索 <code>clang + cmake</code> 都是教你怎么配置 CMake 使 CMake 调用 clang 而不是 gcc 的，搜索 <code>libclang + cmake</code> 得到的很多结果需要配置环境变量，把 clang/llvm 的安装路径指定好。
+而我的 clang 明明就在 <code>PATH</code> 里，凭什么需要另外配置呢。</p>
+
+<p>那么我就来自己想办法。</p>
+
+<p>前两者应该是安装包的时候就自带了的，既然 clang 没有，那么只能去找个 <code>FindLibClang.cmake</code> 啦。</p>
+
+<p>搜索 <code>FindLibClang.cmake</code> ，找到了一个 Emacs 插件 <code>rtags</code> 的一个 <a href="https://github.com/Andersbakken/rtags/blob/master/cmake/FindLibClang.cmake" target="_blank">CMake 模块</a>（注意这个代码是 GPLv3 的哦）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_ROOT_DIR<span class="o">)</span>
+    set<span class="o">(</span>LIBCLANG_ROOT_DIR <span class="nv">$ENV</span><span class="o">{</span>LIBCLANG_ROOT_DIR<span class="o">})</span>
+endif <span class="o">()</span>
+
+<span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+    set<span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE <span class="nv">$ENV</span><span class="o">{</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">})</span>
+    <span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span>APPLE<span class="o">)</span>
+            foreach<span class="o">(</span>major RANGE <span class="m">9</span> <span class="m">3</span><span class="o">)</span>
+                foreach<span class="o">(</span>minor RANGE <span class="m">9</span> <span class="m">0</span><span class="o">)</span>
+                    foreach<span class="o">(</span>patch RANGE <span class="m">9</span> <span class="m">0</span><span class="o">)</span>
+                        message<span class="o">(</span>STATUS <span class="s2">&#34;trying llvm-config llvm-config</span><span class="si">${</span><span class="nv">major</span><span class="si">}${</span><span class="nv">minor</span><span class="si">}</span><span class="s2"> in /usr/local/Cellar/llvm/</span><span class="si">${</span><span class="nv">major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">minor</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">patch</span><span class="si">}</span><span class="s2">/bin&#34;</span><span class="o">)</span>
+                        find_program<span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE NAMES llvm-config llvm-config<span class="si">${</span><span class="nv">major</span><span class="si">}${</span><span class="nv">minor</span><span class="si">}</span> llvm-config-<span class="si">${</span><span class="nv">major</span><span class="si">}${</span><span class="nv">minor</span><span class="si">}</span> llvm-config-<span class="si">${</span><span class="nv">major</span><span class="si">}</span> llvm-config<span class="si">${</span><span class="nv">major</span><span class="si">}</span> PATHS /usr/local/Cellar/llvm/<span class="si">${</span><span class="nv">major</span><span class="si">}</span>.<span class="si">${</span><span class="nv">minor</span><span class="si">}</span>.<span class="si">${</span><span class="nv">patch</span><span class="si">}</span>/bin<span class="o">)</span>
+                        <span class="k">if</span> <span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+                            break<span class="o">()</span>
+                        endif <span class="o">()</span>
+                    endforeach <span class="o">()</span>
+                    <span class="k">if</span> <span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+                        break<span class="o">()</span>
+                    endif <span class="o">()</span>
+                endforeach <span class="o">()</span>
+                <span class="k">if</span> <span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+                    break<span class="o">()</span>
+                endif <span class="o">()</span>
+            endforeach <span class="o">()</span>
+        <span class="k">else</span> <span class="o">()</span>
+            set<span class="o">(</span>llvm_config_names llvm-config<span class="o">)</span>
+            foreach<span class="o">(</span>major RANGE <span class="m">9</span> <span class="m">3</span><span class="o">)</span>
+                list<span class="o">(</span>APPEND llvm_config_names <span class="s2">&#34;llvm-config</span><span class="si">${</span><span class="nv">major</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;llvm-config-</span><span class="si">${</span><span class="nv">major</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+                foreach<span class="o">(</span>minor RANGE <span class="m">9</span> <span class="m">0</span><span class="o">)</span>
+                    list<span class="o">(</span>APPEND llvm_config_names <span class="s2">&#34;llvm-config</span><span class="si">${</span><span class="nv">major</span><span class="si">}${</span><span class="nv">minor</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;llvm-config-</span><span class="si">${</span><span class="nv">major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">minor</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;llvm-config-mp-</span><span class="si">${</span><span class="nv">major</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">minor</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+                endforeach <span class="o">()</span>
+            endforeach <span class="o">()</span>
+            find_program<span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE NAMES <span class="si">${</span><span class="nv">llvm_config_names</span><span class="si">}</span><span class="o">)</span>
+        endif <span class="o">()</span>
+    endif <span class="o">()</span>
+    <span class="k">if</span> <span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+        message<span class="o">(</span>STATUS <span class="s2">&#34;llvm-config executable found: </span><span class="si">${</span><span class="nv">LIBCLANG_LLVM_CONFIG_EXECUTABLE</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+    endif <span class="o">()</span>
+endif <span class="o">()</span>
+
+<span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_CXXFLAGS<span class="o">)</span>
+    <span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+        message<span class="o">(</span>FATAL_ERROR <span class="s2">&#34;Could NOT find llvm-config executable and LIBCLANG_CXXFLAGS is not set &#34;</span><span class="o">)</span>
+    endif <span class="o">()</span>
+    execute_process<span class="o">(</span>COMMAND <span class="si">${</span><span class="nv">LIBCLANG_LLVM_CONFIG_EXECUTABLE</span><span class="si">}</span> --cxxflags OUTPUT_VARIABLE LIBCLANG_CXXFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE<span class="o">)</span>
+    <span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_CXXFLAGS<span class="o">)</span>
+        find_path<span class="o">(</span>LIBCLANG_CXXFLAGS_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT clang-c/Index.h HINTS <span class="si">${</span><span class="nv">LIBCLANG_ROOT_DIR</span><span class="si">}</span>/include NO_DEFAULT_PATH<span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span>NOT EXISTS <span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT</span><span class="si">}</span><span class="o">)</span>
+            find_path<span class="o">(</span>LIBCLANG_CXXFLAGS clang-c/Index.h<span class="o">)</span>
+            <span class="k">if</span> <span class="o">(</span>NOT EXISTS <span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS</span><span class="si">}</span><span class="o">)</span>
+                message<span class="o">(</span>FATAL_ERROR <span class="s2">&#34;Could NOT find clang include path. You can fix this by setting LIBCLANG_CXXFLAGS in your shell or as a cmake variable.&#34;</span><span class="o">)</span>
+            endif <span class="o">()</span>
+        <span class="k">else</span> <span class="o">()</span>
+            set<span class="o">(</span>LIBCLANG_CXXFLAGS <span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT</span><span class="si">}</span><span class="o">)</span>
+        endif <span class="o">()</span>
+        set<span class="o">(</span>LIBCLANG_CXXFLAGS <span class="s2">&#34;-I</span><span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+    endif <span class="o">()</span>
+    string<span class="o">(</span>REGEX MATCHALL <span class="s2">&#34;-(D__?[a-zA-Z_]*|I([^\&#34; ]+|\&#34;[^\&#34;]+\&#34;))&#34;</span> LIBCLANG_CXXFLAGS <span class="s2">&#34;</span><span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+    string<span class="o">(</span>REGEX REPLACE <span class="s2">&#34;;&#34;</span> <span class="s2">&#34; &#34;</span> LIBCLANG_CXXFLAGS <span class="s2">&#34;</span><span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+    set<span class="o">(</span>LIBCLANG_CXXFLAGS <span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS</span><span class="si">}</span> CACHE STRING <span class="s2">&#34;The LLVM C++ compiler flags needed to compile LLVM based applications.&#34;</span><span class="o">)</span>
+    unset<span class="o">(</span>LIBCLANG_CXXFLAGS_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT CACHE<span class="o">)</span>
+endif <span class="o">()</span>
+
+<span class="k">if</span> <span class="o">(</span>NOT EXISTS <span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span><span class="o">)</span>
+    <span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+        message<span class="o">(</span>FATAL_ERROR <span class="s2">&#34;Could NOT find llvm-config executable and LIBCLANG_LIBDIR is not set &#34;</span><span class="o">)</span>
+    endif <span class="o">()</span>
+    execute_process<span class="o">(</span>COMMAND <span class="si">${</span><span class="nv">LIBCLANG_LLVM_CONFIG_EXECUTABLE</span><span class="si">}</span> --libdir OUTPUT_VARIABLE LIBCLANG_LIBDIR OUTPUT_STRIP_TRAILING_WHITESPACE<span class="o">)</span>
+    <span class="k">if</span> <span class="o">(</span>NOT EXISTS <span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span><span class="o">)</span>
+        message<span class="o">(</span>FATAL_ERROR <span class="s2">&#34;Could NOT find clang libdir. You can fix this by setting LIBCLANG_LIBDIR in your shell or as a cmake variable.&#34;</span><span class="o">)</span>
+    endif <span class="o">()</span>
+    set<span class="o">(</span>LIBCLANG_LIBDIR <span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span> CACHE STRING <span class="s2">&#34;Path to the clang library.&#34;</span><span class="o">)</span>
+endif <span class="o">()</span>
+
+<span class="k">if</span> <span class="o">(</span>NOT LIBCLANG_LIBRARIES<span class="o">)</span>
+    find_library<span class="o">(</span>LIBCLANG_LIB_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT NAMES clang libclang HINTS <span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span> <span class="si">${</span><span class="nv">LIBCLANG_ROOT_DIR</span><span class="si">}</span>/lib NO_DEFAULT_PATH<span class="o">)</span>
+    <span class="k">if</span> <span class="o">(</span>LIBCLANG_LIB_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT<span class="o">)</span>
+        set<span class="o">(</span>LIBCLANG_LIBRARIES <span class="s2">&#34;</span><span class="si">${</span><span class="nv">LIBCLANG_LIB_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+    <span class="k">else</span> <span class="o">()</span>
+        find_library<span class="o">(</span>LIBCLANG_LIBRARIES NAMES clang libclang<span class="o">)</span>
+        <span class="k">if</span> <span class="o">(</span>NOT EXISTS <span class="si">${</span><span class="nv">LIBCLANG_LIBRARIES</span><span class="si">}</span><span class="o">)</span>
+            <span class="nb">set</span> <span class="o">(</span>LIBCLANG_LIBRARIES <span class="s2">&#34;-L</span><span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s2">&#34;-lclang&#34;</span> <span class="s2">&#34;-Wl,-rpath,</span><span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+        endif <span class="o">()</span>
+    endif <span class="o">()</span>
+    unset<span class="o">(</span>LIBCLANG_LIB_HACK_CMAKECACHE_DOT_TEXT_BULLSHIT CACHE<span class="o">)</span>
+endif <span class="o">()</span>
+
+set<span class="o">(</span>LIBCLANG_LIBRARY <span class="si">${</span><span class="nv">LIBCLANG_LIBRARIES</span><span class="si">}</span> CACHE FILEPATH <span class="s2">&#34;Path to the libclang library&#34;</span><span class="o">)</span>
+
+<span class="k">if</span> <span class="o">(</span>LIBCLANG_LLVM_CONFIG_EXECUTABLE<span class="o">)</span>
+    execute_process<span class="o">(</span>COMMAND <span class="si">${</span><span class="nv">LIBCLANG_LLVM_CONFIG_EXECUTABLE</span><span class="si">}</span> --version OUTPUT_VARIABLE LIBCLANG_VERSION_STRING OUTPUT_STRIP_TRAILING_WHITESPACE<span class="o">)</span>
+<span class="k">else</span> <span class="o">()</span>
+    set<span class="o">(</span>LIBCLANG_VERSION_STRING <span class="s2">&#34;Unknown&#34;</span><span class="o">)</span>
+endif <span class="o">()</span>
+message<span class="o">(</span><span class="s2">&#34;-- Using Clang version </span><span class="si">${</span><span class="nv">LIBCLANG_VERSION_STRING</span><span class="si">}</span><span class="s2"> from </span><span class="si">${</span><span class="nv">LIBCLANG_LIBDIR</span><span class="si">}</span><span class="s2"> with CXXFLAGS </span><span class="si">${</span><span class="nv">LIBCLANG_CXXFLAGS</span><span class="si">}</span><span class="s2">&#34;</span><span class="o">)</span>
+
+<span class="c1"># Handly the QUIETLY and REQUIRED arguments and set LIBCLANG_FOUND to TRUE if all listed variables are TRUE</span>
+include<span class="o">(</span>FindPackageHandleStandardArgs<span class="o">)</span>
+find_package_handle_standard_args<span class="o">(</span>LibClang DEFAULT_MSG LIBCLANG_LIBRARY LIBCLANG_CXXFLAGS LIBCLANG_LIBDIR<span class="o">)</span>
+mark_as_advanced<span class="o">(</span>LIBCLANG_CXXFLAGS LIBCLANG_LIBRARY LIBCLANG_LLVM_CONFIG_EXECUTABLE LIBCLANG_LIBDIR<span class="o">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其实我中间找到过两三个类似的，但那几个 <code>FindLibClang</code> 都写的不稳，在我的电脑上都不 work ，需要环境变量。
+而看这个实现，它是借助 <code>llvm-config</code> 这个程序（就是配置 llvm 环境的时候的标配啦，一般是 <code>c++ $(llvm-config --cxxflags) main.cpp</code> 这样用的）查找的 clang 配置，稳如老狗。</p>
+
+<p>根据它在注释里写的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="c1"># FindLibClang</span>
+<span class="c1">#</span>
+<span class="c1"># This module searches libclang and llvm-config, the llvm-config tool is used to</span>
+<span class="c1"># get information about the installed llvm/clang package to compile LLVM based</span>
+<span class="c1"># programs.</span>
+<span class="c1">#</span>
+<span class="c1"># It defines the following variables</span>
+<span class="c1">#</span>
+<span class="c1"># ``LIBCLANG_LLVM_CONFIG_EXECUTABLE``</span>
+<span class="c1">#   the llvm-config tool to get various information.</span>
+<span class="c1"># ``LIBCLANG_LIBRARIES``</span>
+<span class="c1">#   the clang libraries to link against to use Clang/LLVM.</span>
+<span class="c1"># ``LIBCLANG_LIBDIR``</span>
+<span class="c1">#   the directory where the clang libraries are located.</span>
+<span class="c1"># ``LIBCLANG_FOUND``</span>
+<span class="c1">#   true if libclang was found</span>
+<span class="c1"># ``LIBCLANG_VERSION_STRING``</span>
+<span class="c1">#   version number as a string</span>
+<span class="c1"># ``LIBCLANG_CXXFLAGS``</span>
+<span class="c1">#   the compiler flags for files that include LLVM headers</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>生成的变量都写清楚了，所以我们就可以很容易地导入它了。
+在我们自己项目里，先把上面的 <code>FindLibClang.cmake</code> 放进 <code>项目根目录/cmake-modules/</code> 目录里（其实就是随便一个目录），然后在 <code>CMakeLists.txt</code> 里写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_MODULE_PATH</span> <span class="o">${</span><span class="nv">CMAKE_MODULE_PATH</span><span class="o">}</span> <span class="s2">&#34;${CMAKE_SOURCE_DIR}/cmake-modules/&#34;</span><span class="p">)</span><span class="err">
+</span><span class="err"></span><span class="nb">find_package</span><span class="p">(</span><span class="s">LibClang</span> <span class="s">REQUIRED</span><span class="p">)</span><span class="err">
+</span><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span> <span class="s2">&#34;${CMAKE_CXX_FLAGS} ${LIBCLANG_CXXFLAGS}&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>就可以让 CMake 找到 clang 的头文件啦。</p>
+
+<p>然后就可以在 CLion 里面写这样的代码了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;clang/AST/ASTConsumer.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;clang/AST/RecursiveASTVisitor.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;clang/Frontend/CompilerInstance.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;clang/Frontend/FrontendAction.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;clang/Tooling/Tooling.h&gt;</span><span class="cp">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以正确地 navigate 到对应的文件，自动生成 <code>override</code> 之类的特性都可以用了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">FindNamedClassAction</span> <span class="o">:</span> <span class="k">public</span> <span class="n">clang</span><span class="o">::</span><span class="n">ASTFrontendAction</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+		<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">clang</span><span class="o">::</span><span class="n">ASTConsumer</span><span class="o">&gt;</span> <span class="n">CreateASTConsumer</span><span class="p">(</span><span class="n">clang</span><span class="o">::</span><span class="n">CompilerInstance</span> <span class="o">&amp;</span><span class="n">CI</span><span class="p">,</span> <span class="n">StringRef</span> <span class="n">InFile</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">clang</span><span class="o">::</span><span class="n">ASTConsumer</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">FindNamedClassASTConsumer</span><span class="p">(</span><span class="n">CI</span><span class="p">.</span><span class="n">getASTContext</span><span class="p">()));</span>
+		<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="k">const</span> <span class="n">argv</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">clang</span><span class="o">::</span><span class="n">tooling</span><span class="o">::</span><span class="n">runToolOnCode</span><span class="p">(</span><span class="k">new</span> <span class="n">FindNamedClassAction</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>目前我还没找到如何正确编译和链接程序的方法，这个代码会导致 unresolved reference:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">clang_test</span> <span class="o">${</span><span class="nv">LIBCLANG_LIBRARIES</span><span class="o">}</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>网上也找不到解决方案，只能自己脑补程序运行的样子。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ice1000</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cmake/">cmake</a>
+          <a href="/tags/clang/">clang</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/portable-Makefile-tutorial/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">可移植的 Makefile 教程</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/Travis-basis/">
+            <span class="next-text nav-default">持续集成教程 1 通识科普</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-16 10:36:02 \x2b0800 \x2b0800',
+        title: '使用 CMake 不用路径地调用 libclang',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

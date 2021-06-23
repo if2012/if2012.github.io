@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/git/</link>
+    <description>Recent content in git on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 30 Aug 2018 21:48:45 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git分支管理</title>
+      <link>http://starifly.github.io/post/git-branch/</link>
+      <pubDate>Thu, 30 Aug 2018 21:48:45 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-branch/</guid>
+      <description>git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。</description>
+    </item>
+    
+    <item>
+      <title>Git的撤销更改</title>
+      <link>http://starifly.github.io/post/git-reset/</link>
+      <pubDate>Wed, 29 Aug 2018 13:20:00 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-reset/</guid>
+      <description>&lt;p&gt;前文《&lt;a href=&#34;https://starifly.github.io/post/git-base/&#34; target=&#34;_blank&#34;&gt;Git基本操作&lt;/a&gt;》介绍了Git的基本概念和一些基本操作。&lt;/p&gt;
+
+&lt;p&gt;本文将介绍Git四个阶段的撤销更改：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;工作区的代码撤销&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;add到暂存区的代码想撤销&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;提交到本地仓库的代码想撤销&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;推送到远程仓库的代码想撤销&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git基本操作</title>
+      <link>http://starifly.github.io/post/git-base/</link>
+      <pubDate>Sat, 25 Aug 2018 22:16:03 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-base/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://starifly.github.io/images/git-base.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>git add -A 和 git add . 的区别</title>
+      <link>http://starifly.github.io/post/git-add-difference/</link>
+      <pubDate>Thu, 23 Aug 2018 20:18:10 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-add-difference/</guid>
+      <description>&lt;p&gt;git add -A、git add .和git add -u在功能上看似相近，但是有细微的差别，而且功能会随着git版本的不同而不同。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git 和 GitHub简易入门</title>
+      <link>http://starifly.github.io/post/git-intro/</link>
+      <pubDate>Wed, 15 Aug 2018 21:51:39 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/git-intro/</guid>
+      <description>开始 拖延症与强迫症严重一直拖到了今天2月23号才开始写。这一段时间我也明白了博客最重要的是keep blogging,所以 想到什么就写什么，没</description>
+    </item>
+    
+  </channel>
+</rss>

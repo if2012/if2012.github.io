@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>centos on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/centos/</link>
+    <description>Recent content in centos on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 30 May 2020 21:59:57 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/centos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux中病毒后的处理过程</title>
+      <link>http://starifly.github.io/post/draft/virus-process-in-linux-system/</link>
+      <pubDate>Sat, 30 May 2020 21:59:57 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/draft/virus-process-in-linux-system/</guid>
+      <description>之前一台 centos 虚拟机中毒，导致CPU飙升，这里记录下处理过程。 查找可疑进程 执行命令ll /proc/ID/exe，通过进程ID确定其执行路径，先删</description>
+    </item>
+    
+  </channel>
+</rss>

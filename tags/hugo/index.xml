@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/hugo/</link>
+    <description>Recent content in hugo on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 18 Aug 2018 12:18:32 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Webhook和Github实现hugo的自动部署</title>
+      <link>http://starifly.github.io/post/webhook-github-autodeploy/</link>
+      <pubDate>Sat, 18 Aug 2018 12:18:32 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/webhook-github-autodeploy/</guid>
+      <description>&lt;p&gt;之前&lt;a href=&#34;https://itlaws.cn/post/hugo-caddy-autodeplay/&#34; target=&#34;_blank&#34;&gt;《通过github和caddy实现hugo的自动部署》&lt;/a&gt;，使用的是 caddy 的 http.git 插件。最近发现，那方法不管用了，不知道原因。&lt;/p&gt;
+
+&lt;p&gt;所以决定使用传统的 webhook 。原理是：在 vps 运行 webhook 监听程序，github 收到 push 事件后，&lt;/p&gt;
+
+&lt;p&gt;就通知该监听程序，由该监听程序执行相应的命令。现在记录一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hugo 自动化部署脚本</title>
+      <link>http://starifly.github.io/post/hugo-deploy-script/</link>
+      <pubDate>Sat, 18 Aug 2018 12:01:32 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/hugo-deploy-script/</guid>
+      <description>&lt;p&gt;之前我写了一个脚本用来自动部署我的 Hugo 博客，今天闲来无事完善了一下这个脚本，使这个脚本更加通用一些。&lt;/p&gt;
+
+&lt;p&gt;脚本路径：&lt;a href=&#34;https://github.com/coderzh/coderzh-hugo-blog/blob/master/deploy.py&#34; target=&#34;_blank&#34;&gt;https://github.com/coderzh/coderzh-hugo-blog/blob/master/deploy.py&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

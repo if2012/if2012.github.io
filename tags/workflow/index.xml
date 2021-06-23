@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>workflow on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/workflow/</link>
+    <description>Recent content in workflow on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 17 Aug 2018 11:58:38 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>无比强大的 Alfred Workflow</title>
+      <link>http://starifly.github.io/post/alfred-workflow/</link>
+      <pubDate>Fri, 17 Aug 2018 11:58:38 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/alfred-workflow/</guid>
+      <description>这是一篇非常有价值，里面的每一个都非常值得大家实践。 Alfred workflow 的详细说明，我就不再赘述了，大家可以直接看最后的参考资料，我把我在用的 Alfred workflow 列一下，以</description>
+    </item>
+    
+  </channel>
+</rss>

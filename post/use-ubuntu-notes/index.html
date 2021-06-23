@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Ubuntu 使用笔记 - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="码志" /><meta name="description" content="使用 Ubuntu 过程中遇到的问题及解决方案。
+" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/use-ubuntu-notes/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Ubuntu 使用笔记" />
+<meta property="og:description" content="使用 Ubuntu 过程中遇到的问题及解决方案。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/use-ubuntu-notes/" />
+<meta property="article:published_time" content="2018-08-15T22:25:03+08:00" />
+<meta property="article:modified_time" content="2018-08-19T00:00:00+00:00" />
+<meta itemprop="name" content="Ubuntu 使用笔记">
+<meta itemprop="description" content="使用 Ubuntu 过程中遇到的问题及解决方案。">
+
+
+<meta itemprop="datePublished" content="2018-08-15T22:25:03&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-19T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1047">
+
+
+
+<meta itemprop="keywords" content="linux,ubuntu," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ubuntu 使用笔记"/>
+<meta name="twitter:description" content="使用 Ubuntu 过程中遇到的问题及解决方案。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Ubuntu 使用笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-15 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> linux </a>
+            </div>
+          <span class="more-meta"> 约 1047 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#使用-git-pull-遇到问题">使用 git pull 遇到问题</a></li>
+<li><a href="#图形界面编辑配置文件">图形界面编辑配置文件</a></li>
+<li><a href="#配置-exchange">配置 Exchange</a></li>
+<li><a href="#安装和配置-jdk">安装和配置 JDK</a></li>
+<li><a href="#配置-adt">配置 adt</a></li>
+<li><a href="#安装-svn-图形前端-rabbitvcs">安装 SVN 图形前端 RabbitVCS</a></li>
+<li><a href="#创建-eclipse-快捷方式">创建 eclipse 快捷方式</a></li>
+<li><a href="#安装-xmind">安装 XMind</a></li>
+<li><a href="#切换输入法">切换输入法</a></li>
+<li><a href="#消除启动-gvim-在-terminal-中的警告">消除启动 gVim 在 terminal 中的警告</a></li>
+<li><a href="#解决-ibus-五笔候选词水平显示和个数的问题">解决 ibus 五笔候选词水平显示和个数的问题</a></li>
+<li><a href="#将-caps-lock-映射为-ctrl">将 Caps Lock 映射为 Ctrl</a></li>
+<li><a href="#将个人文件夹下文件夹名改为英文">将个人文件夹下文件夹名改为英文</a></li>
+<li><a href="#输入-与">输入「」与『』</a></li>
+<li><a href="#virtualbox-里-ubuntu-分辨率无法调整">VirtualBox 里 Ubuntu 分辨率无法调整</a></li>
+<li><a href="#与-win7-共享-ssh-key">与 Win7 共享 SSH key</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>使用 Ubuntu 过程中遇到的问题及解决方案。</p>
+
+<h2 id="使用-git-pull-遇到问题">使用 git pull 遇到问题</h2>
+
+<p>提示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Agent admitted failure to sign using the key.
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.</pre></td></tr></table>
+</div>
+</div>
+<p>解决方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">ssh-add ~/.ssh/id_rsa</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="图形界面编辑配置文件">图形界面编辑配置文件</h2>
+
+<p>安装 dconf-editor。</p>
+
+<h2 id="配置-exchange">配置 Exchange</h2>
+
+<p>为 ThunderBird 安装插件 ExQuilla，有时被墙。</p>
+
+<p><a href="http://mesquilla.net/exquilla-currentrelease-tb-linux.xpi" target="_blank">http://mesquilla.net/exquilla-currentrelease-tb-linux.xpi</a></p>
+
+<h2 id="安装和配置-jdk">安装和配置 JDK</h2>
+
+<p>在 Terminal 运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+sudo vim /etc/profile
+
+<span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/lib/jvm/java-8-oracle
+<span class="nb">export</span> <span class="nv">JRE_HOME</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>/jre
+<span class="nb">export</span> <span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="nv">$JAVA_HOME</span>/lib:<span class="nv">$JRE_HOME</span>/lib
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>/bin:<span class="nv">$JRE_HOME</span>/bin:<span class="nv">$PATH</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="配置-adt">配置 adt</h2>
+
+<p>安装兼容 32 位 adb 运行的环境</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0 lib32stdc++6</code></pre></td></tr></table>
+</div>
+</div>
+<p>添加路径到 $PATH 环境变量，修改 /etc/profile 或 ~/.profile 等皆可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">export ANDROID_SDK_HOME=/home/mzlogin/android/sdk
+export PATH=$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools:$PATH</pre></td></tr></table>
+</div>
+</div>
+<h2 id="安装-svn-图形前端-rabbitvcs">安装 SVN 图形前端 RabbitVCS</h2>
+
+<p>在 Terminal 运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">sudo add-apt-repository ppa:rabbitvcs/ppa
+sudo apt-get update
+sudo apt-get install rabbitvcs-nautilus3 rabbitvcs-thunar rabbitvcs-gedit rabbitvcs-cli</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="创建-eclipse-快捷方式">创建 eclipse 快捷方式</h2>
+
+<p>/usr/share/applications 里新建 Eclipse.desktop，填如下内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">[Desktop Entry]
+Name=Eclipse
+Comment=Launch Eclipse
+Exec=/home/mzlogin/android/eclipse/eclipse
+Icon=/home/mzlogin/android/eclipse/icon.xpm
+StartupNotify=true
+Terminal=false
+Type=Application</pre></td></tr></table>
+</div>
+</div>
+<h2 id="安装-xmind">安装 XMind</h2>
+
+<p>到 XMind 官网下载安装包，然后 ：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">sudo dpkg --ignore-depends<span class="o">=</span>lame,libwebkitgtk-1.0-0 -i xmind-linux-3.5.0.201410310637_amd64.deb</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="切换输入法">切换输入法</h2>
+
+<p>添加一个英文，一个五笔，将切换到上一个源和下一个源的快捷键分别设为左和右 Shift，这样就可以使用左右 Shift 在中英之间来回切换了。</p>
+
+<p>安装 im-switch 会导致语言支持被移除，恢复用 <code>sudo apt-get install language-selector-gnome</code>。</p>
+
+<h2 id="消除启动-gvim-在-terminal-中的警告">消除启动 gVim 在 terminal 中的警告</h2>
+
+<p>安装 vim-gnome 后运行 gVim 会提示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">GLib-GObject-WARNING **: Attempt to add property GnomeProgram::sm-connect after class was initialised</pre></td></tr></table>
+</div>
+</div>
+<p>改为安装 vim-gtk 就好了。</p>
+
+<h2 id="解决-ibus-五笔候选词水平显示和个数的问题">解决 ibus 五笔候选词水平显示和个数的问题</h2>
+
+<p>修改 /usr/share/ibus-table/tables/wubi-jidian86.db 的 ime 表里的 orientation（水平 0 垂直 1）和 select_keys（有几个选择键就有几个项，从下面代码可知用 <code>,</code> 分隔）。</p>
+
+<p>/usr/share/ibus-tables/engine/tabsqlitedb.py 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_page_size</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_select_keys</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="将-caps-lock-映射为-ctrl">将 Caps Lock 映射为 Ctrl</h2>
+
+<ol>
+<li><p>安装 Gnome Tweak Tool</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">sudo apt-get install gnome-tweak-tool</code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>打开 tweak-tool，找到「打字」－「大写锁定键行为」，选择「将 CapsLock 作为额外的 Ctrl」</p></li>
+</ol>
+
+<p>参考 <a href="http://askubuntu.com/questions/462021/how-do-i-turn-caps-lock-into-an-extra-control-key" target="_blank">http://askubuntu.com/questions/462021/how-do-i-turn-caps-lock-into-an-extra-control-key</a></p>
+
+<h2 id="将个人文件夹下文件夹名改为英文">将个人文件夹下文件夹名改为英文</h2>
+
+<p>~ 目录下的「桌面」和「文档」等文件夹是中文，在 Terminal 下输入很不方便，将其改为英文的方法：</p>
+
+<ol>
+<li><p>打开 ~/.config/user-dirs.dirs，将其中的中文改掉：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">XDG_DESKTOP_DIR=&#34;$HOME/desktop&#34;
+XDG_DOWNLOAD_DIR=&#34;$HOME/downloads&#34;
+XDG_TEMPLATES_DIR=&#34;$HOME/templates&#34;
+XDG_PUBLICSHARE_DIR=&#34;$HOME/public&#34;
+XDG_DOCUMENTS_DIR=&#34;$HOME/documents&#34;
+XDG_MUSIC_DIR=&#34;$HOME/music&#34;
+XDG_PICTURES_DIR=&#34;$HOME/pictures&#34;
+XDG_VIDEOS_DIR=&#34;$HOME/videos&#34;</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>在文件管理器中将 HOME 目录下的中文文件夹名改成与上面的配置对应。</p></li>
+</ol>
+
+<h2 id="输入-与">输入「」与『』</h2>
+
+<p>极点五笔中文输入状态下，按 [] 即输入「」，按 {} 即输入『』。</p>
+
+<h2 id="virtualbox-里-ubuntu-分辨率无法调整">VirtualBox 里 Ubuntu 分辨率无法调整</h2>
+
+<p>Ubuntu 14.04 LTS 在 VirtualBox 中刚安装完时，分辨率只有 640*480 一种选项，无法调整。</p>
+
+<p>解决方法：</p>
+
+<ol>
+<li><p>打开 xdiagnose</p>
+
+<p><img src="https://raw.githubusercontent.com/mzlogin/mzlogin.github.io/master/images/posts/linux/xdiagnose.png" alt="" /></p></li>
+
+<li><p>勾选 Debug 下的所有选项</p>
+
+<p><img src="https://raw.githubusercontent.com/mzlogin/mzlogin.github.io/master/images/posts/linux/xdiagnose-2.png" alt="" /></p></li>
+
+<li><p>重启</p></li>
+
+<li><p>安装增强功能</p>
+
+<p><img src="https://raw.githubusercontent.com/mzlogin/mzlogin.github.io/master/images/posts/linux/install-additions.png" alt="" /></p></li>
+</ol>
+
+<p>然后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">   cd /media/&lt;username&gt;/VBOXADDITIONS_X.X.XX_XXXXX
+   sudo ./VBoxLinuxAdditions.run</pre></td></tr></table>
+</div>
+</div>
+<p>（注意把 username 替换成自己的，VBOXADDITIONS 后面的 X 换成具体版本号）</p>
+
+<h2 id="与-win7-共享-ssh-key">与 Win7 共享 SSH key</h2>
+
+<p>如下步骤适用于在 Ubuntu 上使用从 Win7 拷贝的 SSH key，反之应该也一样能用。</p>
+
+<p>创建 ~/.ssh 目录，确认其权限为 0700，将 Windows %userprofile%/.ssh 下的 id_rsa 和 id_rsa.pub 文件拷贝到 ~/.ssh 目录下，权限分别改为 0600 和 0644。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">mzlogin@ubuntu:~$ ll ~/.ssh
+total <span class="m">20</span>
+drwx------  <span class="m">2</span> mzlogin mzlogin <span class="m">4096</span> Jun <span class="m">22</span> <span class="m">01</span>:03 ./
+drwxr-xr-x <span class="m">20</span> mzlogin mzlogin <span class="m">4096</span> Jun <span class="m">22</span> <span class="m">01</span>:02 ../
+-rw-------  <span class="m">1</span> mzlogin mzlogin <span class="m">1679</span> Jun <span class="m">21</span> <span class="m">05</span>:17 id_rsa
+-rw-r--r--  <span class="m">1</span> mzlogin mzlogin  <span class="m">399</span> Jun <span class="m">21</span> <span class="m">05</span>:17 id_rsa.pub</code></pre></td></tr></table>
+</div>
+</div>
+<p>然后</p>
+
+<p>```sh
+ssh-add ~/.ssh/id_rsa</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">码志</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">linux</a>
+          <a href="/tags/ubuntu/">ubuntu</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/vim-markdown-toc/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">为 Markdown 生成 TOC 的 Vim 插件</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/git-intro/">
+            <span class="next-text nav-default">Git 和 GitHub简易入门</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-15 22:25:03 \x2b0800 \x2b0800',
+        title: 'Ubuntu 使用笔记',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

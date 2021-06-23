@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ubuntu on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/ubuntu/</link>
+    <description>Recent content in ubuntu on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 15 Aug 2018 22:25:03 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu 使用笔记</title>
+      <link>http://starifly.github.io/post/use-ubuntu-notes/</link>
+      <pubDate>Wed, 15 Aug 2018 22:25:03 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/use-ubuntu-notes/</guid>
+      <description>&lt;p&gt;使用 Ubuntu 过程中遇到的问题及解决方案。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

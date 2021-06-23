@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>coroutine on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/coroutine/</link>
+    <description>Recent content in coroutine on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 02 Sep 2018 19:35:16 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/coroutine/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一个“蝇量级” C 语言协程库</title>
+      <link>http://starifly.github.io/post/a-c-coroutine/</link>
+      <pubDate>Sun, 02 Sep 2018 19:35:16 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/a-c-coroutine/</guid>
+      <description>本文为转载文章， 原文地址 https://coolshell.cn/articles/10975.html （感谢网友 @我的上铺叫路遥 投稿） 协程 (coroutine) 顾名思义就是“协作的例程”（co-operative routines）。跟具</description>
+    </item>
+    
+  </channel>
+</rss>

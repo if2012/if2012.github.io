@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>learning on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/learning/</link>
+    <description>Recent content in learning on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 17 Aug 2018 15:51:10 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learning Something</title>
+      <link>http://starifly.github.io/post/learning-something/</link>
+      <pubDate>Fri, 17 Aug 2018 15:51:10 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/learning-something/</guid>
+      <description>&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://zilongshanren.com/blog/2017-05-09-learning-how-to-learn.html&#34; target=&#34;_blank&#34;&gt;Learning How to Learn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.xianmin.org/post/read-peak/&#34; target=&#34;_blank&#34;&gt;关于编程的练习方法——读《刻意练习》有感&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.xianmin.org/post/read-how-to-read-a-book/&#34; target=&#34;_blank&#34;&gt;《如何阅读一本书》阅读笔记&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zilongshanren.com/blog/2015-10-14-pesudo-perfect-workflow.html&#34; target=&#34;_blank&#34;&gt;工作流&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.xianmin.org/post/note-opensource-project/&#34; target=&#34;_blank&#34;&gt;笔记：有关开源项目&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

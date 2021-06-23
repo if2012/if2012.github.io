@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>makefile on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/categories/makefile/</link>
+    <description>Recent content in makefile on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 16 Aug 2018 10:57:09 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/categories/makefile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>可移植的 Makefile 教程</title>
+      <link>http://starifly.github.io/post/portable-Makefile-tutorial/</link>
+      <pubDate>Thu, 16 Aug 2018 10:57:09 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/portable-Makefile-tutorial/</guid>
+      <description>&lt;p&gt;在我写 Makefile 的头 10 年里，我养成了一个非常不好的习惯&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash; 完全严格使用 GNU Make 的扩展名。过去我并不知道， GNU Make 与 POSIX 所保证的可移植特性之间的区别与联系。通常情况，它并不十分重要，但是当在非 Linux 系统上进行构建时，比如在各种 BSD 系统上，就会变成一件麻烦事儿。我不得不指定安装 GNU Make，然后在心里记住不要使用系统自带的 make ，而是使用 gmake 这样的工具来调用它。&lt;/p&gt;
+
+&lt;p&gt;我已经对 &lt;a href=&#34;https://link.jianshu.com?t=http://pubs.opengroup.org/onlinepubs/009695399/utilities/make.html&#34; target=&#34;_blank&#34;&gt;make 官方规范&lt;/a&gt; 十分熟悉，并且在过去的一年，我都在严格要求自己编写可移植的 Makefile。现在，我的构建不仅可以在各种类 unix 的系统之间进行移植，而且 Makefile 看起来更清晰与健壮。许多常见的 make 扩展名 &amp;ndash; 尤其是条件判断 &amp;ndash; 会导致不够健壮的却又复杂的 Makefile, 因此最好避免这些情况。能够确信你的构建系统能够各司其职，正常工作是非常重要的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;本指南不仅适用于之前从来没有写过 Makefile 的 make 初学者，同样适用于想要学习如何写出可移植 Makefile 的资深开发者。&lt;/strong&gt; 但不管怎样，为了能够理解文中的示例，你必须首先对命令行（编译器，链接器，目标文件等等）构建程序的常规步骤十分熟悉。我不会建议使用任何花哨的技巧，也不会提供任何标准的初学者模板。当项目不大的时候，Makefile 应该是相当的简单，并且随着项目的成长，以一种可预见，清晰的方式不断丰富。&lt;/p&gt;
+
+&lt;p&gt;我不会覆盖 make 的每一个特性。如果想要学习所有完整的内容，你需要自行阅读它的规范。本指南将会详细讨论一些重要特性和约定俗成的规定。遵守已有的约定是非常重要的，这样使用你的 Makefile 的其他人，才能知道它能够完成和如何完成一些基本的任务。&lt;/p&gt;
+
+&lt;p&gt;如果你的系统是 Debian, 或是基于 Debian 的系统，比如 Ubuntu，&lt;code&gt;bmake&lt;/code&gt; 和 &lt;code&gt;freebsd-buildutils&lt;/code&gt; 包将会分别提供 &lt;code&gt;bmake&lt;/code&gt; 和 &lt;code&gt;fmake&lt;/code&gt; 程序。这些可供选择的 make 实现，对于测试 Makefile 的可移植性十分有用，尤其是当你不小心使用了 GNU Make 的特性。虽然每个实现都实现了与 GNU Make 完全相同的一些扩展，但是它会捕获一些常见的错误。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

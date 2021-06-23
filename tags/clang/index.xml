@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>clang on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/clang/</link>
+    <description>Recent content in clang on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 16 Aug 2018 10:36:02 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/clang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用 CMake 不用路径地调用 libclang</title>
+      <link>http://starifly.github.io/post/CMake-clang/</link>
+      <pubDate>Thu, 16 Aug 2018 10:36:02 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/CMake-clang/</guid>
+      <description>作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、</description>
+    </item>
+    
+  </channel>
+</rss>

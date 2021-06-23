@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/categories/linux/</link>
+    <description>Recent content in linux on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 30 May 2020 21:59:57 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux中病毒后的处理过程</title>
+      <link>http://starifly.github.io/post/draft/virus-process-in-linux-system/</link>
+      <pubDate>Sat, 30 May 2020 21:59:57 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/draft/virus-process-in-linux-system/</guid>
+      <description>之前一台 centos 虚拟机中毒，导致CPU飙升，这里记录下处理过程。 查找可疑进程 执行命令ll /proc/ID/exe，通过进程ID确定其执行路径，先删</description>
+    </item>
+    
+    <item>
+      <title>Linux 中 profile，bashrc，bash_profile等的区别</title>
+      <link>http://starifly.github.io/post/profile-bashrc-bash_profile-in-linux/</link>
+      <pubDate>Fri, 17 Aug 2018 11:52:00 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/profile-bashrc-bash_profile-in-linux/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;这是一篇有关环境变量加载的入门介绍（不太确定）。&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/profile&lt;/code&gt;: 此文件为系统的每个用户设置环境信息，当用户第一次登录时，该文件被执行。并从 &lt;code&gt;/etc/profile.d&lt;/code&gt; 目录的配置文件中收集 shell 的设置。如果你有对 &lt;code&gt;/etc/profile&lt;/code&gt; 有修改的话必须得 source 一下 你的修改才会生效，此修改对*每个用户*都生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/bashrc&lt;/code&gt;: 为每一个运行 bash shell 的用户执行此文件。当 bash shell 被打开时，该文件被读取。如果你想对所有的使用 bash 的用户修改某个配置并在以后打开的 bash 都生效的话可以修改这个文件，修改这个文件不用重启，重新打开一个 bash 即可生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.bash_profile&lt;/code&gt;: 每个用户都可使用该文件输入专用于自己使用的 shell 信息，当用户登录时，该文件仅仅执行一次!默认情况下,他设置一些环境变量，执行用户的 .bashrc 文件。
+此文件类似于 &lt;code&gt;/etc/profile&lt;/code&gt;，也是需要需要 source 才会生效，&lt;code&gt;/etc/profile&lt;/code&gt; 对所有用户生效，&lt;code&gt;~/.bash_profile&lt;/code&gt; 只对当前用户生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.bashrc&lt;/code&gt;: 该文件包含专用于你的 bash shell 的 bash 信息，当登录时以及每次打开新的 shell 时，该文件被读取。（每个用户都有一个 &lt;code&gt;.bashrc&lt;/code&gt; 文件，在用户目录下）
+此文件类似于 &lt;code&gt;/etc/bashrc&lt;/code&gt;，不需要重启就可以生效，重新打开一个 bash 即可生效，&lt;code&gt;/etc/bashrc&lt;/code&gt; 对所有用户新打开的 bash 都生效，但 &lt;code&gt;~/.bashrc&lt;/code&gt; 只对当前用户新打开的 bash 生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.bash_logout&lt;/code&gt;: 当每次退出系统(退出 bash shell)时，执行该文件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 使用笔记</title>
+      <link>http://starifly.github.io/post/use-ubuntu-notes/</link>
+      <pubDate>Wed, 15 Aug 2018 22:25:03 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/use-ubuntu-notes/</guid>
+      <description>&lt;p&gt;使用 Ubuntu 过程中遇到的问题及解决方案。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git的撤销更改 - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="starifly" /><meta name="description" content="前文《Git基本操作》介绍了Git的基本概念和一些基本操作。
+本文将介绍Git四个阶段的撤销更改：
+ 工作区的代码撤销
+ add到暂存区的代码想撤销
+ 提交到本地仓库的代码想撤销
+ 推送到远程仓库的代码想撤销 " /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/git-reset/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git的撤销更改" />
+<meta property="og:description" content="前文《Git基本操作》介绍了Git的基本概念和一些基本操作。
+
+本文将介绍Git四个阶段的撤销更改：
+
+
+工作区的代码撤销
+add到暂存区的代码想撤销
+提交到本地仓库的代码想撤销
+推送到远程仓库的代码想撤销
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/git-reset/" />
+<meta property="article:published_time" content="2018-08-29T13:20:00+08:00" />
+<meta property="article:modified_time" content="2018-09-09T00:00:00+00:00" />
+<meta itemprop="name" content="Git的撤销更改">
+<meta itemprop="description" content="前文《Git基本操作》介绍了Git的基本概念和一些基本操作。
+
+本文将介绍Git四个阶段的撤销更改：
+
+
+工作区的代码撤销
+add到暂存区的代码想撤销
+提交到本地仓库的代码想撤销
+推送到远程仓库的代码想撤销
+">
+
+
+<meta itemprop="datePublished" content="2018-08-29T13:20:00&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-09T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1386">
+
+
+
+<meta itemprop="keywords" content="git," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git的撤销更改"/>
+<meta name="twitter:description" content="前文《Git基本操作》介绍了Git的基本概念和一些基本操作。
+
+本文将介绍Git四个阶段的撤销更改：
+
+
+工作区的代码撤销
+add到暂存区的代码想撤销
+提交到本地仓库的代码想撤销
+推送到远程仓库的代码想撤销
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git的撤销更改</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-29 </span>
+        <div class="post-category">
+            <a href="/categories/git/"> git </a>
+            </div>
+          <span class="more-meta"> 约 1386 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#工作区代码的撤销">工作区代码的撤销</a></li>
+<li><a href="#add到暂存区的代码想撤销">add到暂存区的代码想撤销</a></li>
+<li><a href="#提交到本地仓库的代码想撤销">提交到本地仓库的代码想撤销</a>
+<ul>
+<li><a href="#回撤到指定版本号">回撤到指定版本号</a></li>
+<li><a href="#回撤到add之后未commit之前的状态">回撤到add之后未commit之前的状态</a></li>
+</ul></li>
+<li><a href="#push到远程仓库的代码想撤销">push到远程仓库的代码想撤销</a>
+<ul>
+<li><a href="#1-撤销提交信息">1.撤销提交信息</a></li>
+<li><a href="#2-撤销">2.撤销</a></li>
+<li><a href="#3-修改代码-重新提交和推送">3.修改代码，重新提交和推送</a></li>
+</ul></li>
+<li><a href="#reference">Reference</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>前文《<a href="https://starifly.github.io/post/git-base/" target="_blank">Git基本操作</a>》介绍了Git的基本概念和一些基本操作。</p>
+
+<p>本文将介绍Git四个阶段的撤销更改：</p>
+
+<ol>
+<li>工作区的代码撤销<br /></li>
+<li>add到暂存区的代码想撤销<br /></li>
+<li>提交到本地仓库的代码想撤销<br /></li>
+<li>推送到远程仓库的代码想撤销</li>
+</ol>
+
+<h2 id="工作区代码的撤销">工作区代码的撤销</h2>
+
+<p>如果我们在工作区修改了文件，状态会变为Modified，这时忽然发现写错了想回到一开始未修改状态，愚蠢的办法是打开文件一个一个的去恢复，其实可以通过<code>git checkout .</code>命令来一键撤销工作区的代码修改，
+当然也可以通过<code>git checkout -- &lt;filename&gt;</code>命令来指定撤销的文件。</p>
+
+<h2 id="add到暂存区的代码想撤销">add到暂存区的代码想撤销</h2>
+
+<p>如果<code>add</code>到了暂存区，你发现了错误想要撤销，可以执行以下两个步骤：</p>
+
+<ol>
+<li><code>git reset HEAD</code> or <code>git reset</code></li>
+<li>同以上&rsquo;工作区代码撤销&rsquo;</li>
+</ol>
+
+<blockquote>
+<p><code>git reset</code>的参数，其值可以是hard、mixed及soft，mixed实现的是<code>add</code>后的回撤，上文中关于暂存未提交回撤中的<code>git reset</code>其实就是默认用的mixed参数，soft请听下文分解。</p>
+</blockquote>
+
+<p>三者的区别：</p>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>HEAD的位置</th>
+<th>索引</th>
+<th>工作树</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>soft</td>
+<td>修改</td>
+<td>不修改</td>
+<td>不修改</td>
+</tr>
+
+<tr>
+<td>mixed</td>
+<td>修改</td>
+<td>修改</td>
+<td>不修改</td>
+</tr>
+
+<tr>
+<td>hard</td>
+<td>修改</td>
+<td>修改</td>
+<td>修改</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="提交到本地仓库的代码想撤销">提交到本地仓库的代码想撤销</h2>
+
+<p>如果执行了<code>git commit</code>命令把代码提交到了本地仓库，如果你后悔了，怎么办？不要着急，同样也可以撤销。</p>
+
+<p>有以下两种情形：</p>
+
+<h3 id="回撤到指定版本号">回撤到指定版本号</h3>
+
+<p>可以利用<code>git reset --hard &lt;版本号&gt;</code>命令来实现版本回退，该命令中的版本号有几种不同的写法：</p>
+
+<blockquote>
+<p>1.可以使用HEAD^来描述版本，一个^表示前一个版本，两个^^表示前两个版本，以此类推。<br />
+2.也可以使用数字来代替^，比如说前100个版本可以写作HEAD~100。<br />
+3.也可以直接写版本号，表示跳转到某一个版本处（通过<code>git log</code>查看当前提交日志）。</p>
+</blockquote>
+
+<h3 id="回撤到add之后未commit之前的状态">回撤到add之后未commit之前的状态</h3>
+
+<p>soft实现的是<code>commit</code>之后回撤到<code>add</code>之后未<code>commit</code>之前的状态，所以，像在<code>commit</code>之后发现少提交了一个文件等场景下，我们可以利用<code>git reset --soft HEAD^</code>命令来回撤。</p>
+
+<h2 id="push到远程仓库的代码想撤销">push到远程仓库的代码想撤销</h2>
+
+<p>有时，在<code>git push</code>之后，才发现还有一些代码需要进行很小的改动，这些改动在原则上不应该作为一次新的提交。
+这时，我们需要撤销这次推送(<code>git push</code>)与提交(<code>git commit</code>)，然后进行代码修改，再重新进行提交和推送。</p>
+
+<p>为了实现这个目的，需要进行三步操作:</p>
+
+<h3 id="1-撤销提交信息">1.撤销提交信息</h3>
+
+<p>通过执行<code>git reset --soft &lt;版本号&gt;</code>重置至指定版本的提交，达到撤销提交的目的。</p>
+
+<blockquote>
+<p>参数soft指的是：保留当前工作区，以便重新提交。<br />
+还可以选择参数hard，会撤销相应工作区的修改，而且有可能意外造成代码丢失，所以一定要谨慎使用。</p>
+</blockquote>
+
+<p>然后，通过<code>git log</code>确认是否成功撤销。</p>
+
+<h3 id="2-撤销">2.撤销</h3>
+
+<p>通过<code>git push origin master --force</code>强制提交当前版本号，以达到撤销版本号的目的。</p>
+
+<p>当他人在仓库的远程副本的同一分支上进行改动后，会发生强制推送的风险。当你强制推送已重写的历史记录时，某些提交将会丢失。这是<code>git push --force-with-lease</code>出现的原因 - 如果远程分支已更新，它不会允许你执行强制推送，这将确保你不会丢弃他人的工作。</p>
+
+<blockquote>
+<p>必须添加参数force进行强制提交，否则会提交失败，并报错。<br />
+报错原因：本地项目版本号低于远端仓库版本号。</p>
+</blockquote>
+
+<h3 id="3-修改代码-重新提交和推送">3.修改代码，重新提交和推送</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">//修改代码，添加修改
+$ git add .
+//重新提交
+$ git commit -m <span class="s2">&#34;message&#34;</span>
+//重新推送
+$ git push origin master</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://segmentfault.com/a/1190000011910766" target="_blank">Git中的各种后悔药</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">starifly</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-09-09
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">git</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/git-branch/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Git分支管理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/git-base/">
+            <span class="next-text nav-default">Git基本操作</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-29 13:20:00 \x2b0800 \x2b0800',
+        title: 'Git的撤销更改',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

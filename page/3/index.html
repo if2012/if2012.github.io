@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="starifly" /><meta name="description" content="个人的一些记录" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/" />
+  <link href="http://starifly.github.io/index.xml" rel="alternate" type="application/rss+xml" title="starifly&#39;s Blog" />
+  <link href="http://starifly.github.io/index.xml" rel="feed" type="application/rss+xml" title="starifly&#39;s Blog" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="starifly&#39;s Blog" />
+<meta property="og:description" content="个人的一些记录" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://starifly.github.io/" />
+
+<meta property="og:updated_time" content="2020-05-30T21:59:57+08:00" />
+<meta itemprop="name" content="starifly&#39;s Blog">
+<meta itemprop="description" content="个人的一些记录">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="starifly&#39;s Blog"/>
+<meta name="twitter:description" content="个人的一些记录"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/use-webhook-automated-deploy-hugo/">通过webhook将Hugo自动部署至GitHub Pages和GitCafe Pages</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-16 </span>
+      <div class="post-category">
+          <a href="/categories/CI/"> CI </a>
+          </div>
+        <span class="more-meta"> 约 2410 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本文的主要内容如标题所示，通过webhook将Hugo自动部署至GitHub Pages和GitCafe Pages。如果你正好有这个需求，看这篇文章正好，可以节省你不少时间。如果不是，了解一下也无妨。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/use-webhook-automated-deploy-hugo/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/live-streaming-with-flv/">使用flv.js做直播</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-16 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"> 音视频 </a>
+          </div>
+        <span class="more-meta"> 约 2607 字 </span>
+        <span class="more-meta"> 预计阅读 6 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。</p>
+
+<p>在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些<a href="https://github.com/gwuhaolin/blog/issues/5" target="_blank">基础概念</a>。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/live-streaming-with-flv/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/audio-video-tech-references/">音视频技术参考资料</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-16 </span>
+      <div class="post-category">
+          <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"> 音视频 </a>
+          </div>
+        <span class="more-meta"> 约 131 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h2 id="入门与概念">入门与概念</h2>
+
+<ul>
+<li><a href="http://blog.csdn.net/leixiaohua1020/article/details/18893769" target="_blank">[总结]视音频编解码技术零基础学习方法</a></li>
+<li><a href="http://www.ruoxu.me/yin-shi-pin-qi-fa" target="_blank">入门启发：音视频的简单理解</a></li>
+<li><a href="https://wuyuans.com/2012/01/video_encode_frame" target="_blank">视频编码基础&ndash;帧的类型</a></li>
+</ul>
+
+<h2 id="容器格式">容器格式</h2>
+
+<ul>
+<li><a href="http://blog.csdn.net/leixiaohua1020/article/details/17934487" target="_blank">视音频编解码学习工程：FLV封装格式分析器</a></li>
+</ul>
+
+<h2 id="传输协议">传输协议</h2>
+
+<ul>
+<li><a href="https://chenlichao.gitbooks.io/rtmp-zh_cn/content/1-introduction.html" target="_blank">RTMP协议规范</a></li>
+<li><a href="http://mingyangshang.github.io/2016/03/06/RTMP协议/" target="_blank">带你吃透RTMP</a></li>
+<li><a href="http://blog.csdn.net/win_lin/article/details/12615591" target="_blank">RTMP服务器的延迟，多级边缘不影响延迟，gop为最大因素</a></li>
+</ul>
+
+<h2 id="编解码">编解码</h2>
+    </div>
+    <div class="read-more">
+      <a href="/post/audio-video-tech-references/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/portable-Makefile-tutorial/">可移植的 Makefile 教程</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-16 </span>
+      <div class="post-category">
+          <a href="/categories/makefile/"> makefile </a>
+          </div>
+        <span class="more-meta"> 约 5705 字 </span>
+        <span class="more-meta"> 预计阅读 12 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在我写 Makefile 的头 10 年里，我养成了一个非常不好的习惯</p>
+
+<p>&ndash; 完全严格使用 GNU Make 的扩展名。过去我并不知道， GNU Make 与 POSIX 所保证的可移植特性之间的区别与联系。通常情况，它并不十分重要，但是当在非 Linux 系统上进行构建时，比如在各种 BSD 系统上，就会变成一件麻烦事儿。我不得不指定安装 GNU Make，然后在心里记住不要使用系统自带的 make ，而是使用 gmake 这样的工具来调用它。</p>
+
+<p>我已经对 <a href="https://link.jianshu.com?t=http://pubs.opengroup.org/onlinepubs/009695399/utilities/make.html" target="_blank">make 官方规范</a> 十分熟悉，并且在过去的一年，我都在严格要求自己编写可移植的 Makefile。现在，我的构建不仅可以在各种类 unix 的系统之间进行移植，而且 Makefile 看起来更清晰与健壮。许多常见的 make 扩展名 &ndash; 尤其是条件判断 &ndash; 会导致不够健壮的却又复杂的 Makefile, 因此最好避免这些情况。能够确信你的构建系统能够各司其职，正常工作是非常重要的。</p>
+
+<p><strong>本指南不仅适用于之前从来没有写过 Makefile 的 make 初学者，同样适用于想要学习如何写出可移植 Makefile 的资深开发者。</strong> 但不管怎样，为了能够理解文中的示例，你必须首先对命令行（编译器，链接器，目标文件等等）构建程序的常规步骤十分熟悉。我不会建议使用任何花哨的技巧，也不会提供任何标准的初学者模板。当项目不大的时候，Makefile 应该是相当的简单，并且随着项目的成长，以一种可预见，清晰的方式不断丰富。</p>
+
+<p>我不会覆盖 make 的每一个特性。如果想要学习所有完整的内容，你需要自行阅读它的规范。本指南将会详细讨论一些重要特性和约定俗成的规定。遵守已有的约定是非常重要的，这样使用你的 Makefile 的其他人，才能知道它能够完成和如何完成一些基本的任务。</p>
+
+<p>如果你的系统是 Debian, 或是基于 Debian 的系统，比如 Ubuntu，<code>bmake</code> 和 <code>freebsd-buildutils</code> 包将会分别提供 <code>bmake</code> 和 <code>fmake</code> 程序。这些可供选择的 make 实现，对于测试 Makefile 的可移植性十分有用，尤其是当你不小心使用了 GNU Make 的特性。虽然每个实现都实现了与 GNU Make 完全相同的一些扩展，但是它会捕获一些常见的错误。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/portable-Makefile-tutorial/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/CMake-clang/">使用 CMake 不用路径地调用 libclang</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-16 </span>
+      <div class="post-category">
+          <a href="/categories/cmake/"> cmake </a>
+          </div>
+        <span class="more-meta"> 约 1841 字 </span>
+        <span class="more-meta"> 预计阅读 4 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      作为一个有高尚的情操的程序员，应该学会在写非练手项目的时候构建流程不使用与本机路径相关的依赖，这样把代码往 CI 上部署、在公司与个人电脑间传输、
+    </div>
+    <div class="read-more">
+      <a href="/post/CMake-clang/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/Travis-basis/">持续集成教程 1 通识科普</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-16 </span>
+      <div class="post-category">
+          <a href="/categories/CI/"> CI </a>
+          </div>
+        <span class="more-meta"> 约 885 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>本教程系列将以 Travis CI 为主，我也不知道以后会不会讲 AppVeyor ，我也不知道以后会不会讲 Circle CI 和 CodeShip 。
+这篇文章你可以把它当成一个索引，我给出了使用 Travis 需要阅读的内容，读者可以根据自己的需求选择阅读文档的特定部分。</p>
+
+<h2 id="ci-能做啥">CI 能做啥</h2>
+
+<ul>
+<li>能帮你在云端自动编译项目</li>
+<li>每次你推送代码就会触发编译</li>
+<li>可以保留编译生成的目标文件</li>
+<li>自动上传 release</li>
+<li>编译失败发邮件提醒你</li>
+<li>编译失败发 Slack 消息提醒你</li>
+</ul>
+
+<p>等等功能（这些都是最基本的）</p>
+
+<p>混开源社区的 friends 喜欢使用一些现有的 CI 服务，比如 Travis, AppVeyor, Circle CI, CodeShip 等，
+公司企业喜欢自己写 CI 自己用，因为这本来就是个高度定制的东西，要是你能提供高度定制的环境（比如装好了依赖的服务器）
+当然做 CI 就超级简单了。</p>
+
+<p>但是我们是混开源社区的 friends ，所以没有这种操作，首选当然是 Travis CI 。</p>
+
+<p>理由： Linux + 自动部署</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/Travis-basis/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/vim-markdown-toc/">为 Markdown 生成 TOC 的 Vim 插件</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-15 </span>
+      <div class="post-category">
+          <a href="/categories/vim/"> vim </a>
+          </div>
+        <span class="more-meta"> 约 1039 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      因为饱受 GFM 和 Redcarpet 两种 Markdown 引擎生成 TOC 链接的差异的折磨，而我又不得不同时使用它们——博客基于 Jekyll 使用 Redcarpet（*Update 2016/09/16: GitHub Pages 现在已经改
+    </div>
+    <div class="read-more">
+      <a href="/post/vim-markdown-toc/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/use-ubuntu-notes/">Ubuntu 使用笔记</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-08-15 </span>
+      <div class="post-category">
+          <a href="/categories/linux/"> linux </a>
+          </div>
+        <span class="more-meta"> 约 1047 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>使用 Ubuntu 过程中遇到的问题及解决方案。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/use-ubuntu-notes/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    <a class="prev" href="/page/2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    <a class="next" href="/page/4/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

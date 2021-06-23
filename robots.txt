@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: http://starifly.github.io/sitemap.xml

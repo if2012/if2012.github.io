@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git基本操作 - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="starifly" /><meta name="description" content="" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/git-base/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git基本操作" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/git-base/" />
+<meta property="article:published_time" content="2018-08-25T22:16:03+08:00" />
+<meta property="article:modified_time" content="2018-09-08T00:00:00+00:00" />
+<meta itemprop="name" content="Git基本操作">
+<meta itemprop="description" content="">
+
+
+<meta itemprop="datePublished" content="2018-08-25T22:16:03&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-08T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2923">
+
+
+
+<meta itemprop="keywords" content="git," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git基本操作"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git基本操作</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-25 </span>
+        <div class="post-category">
+            <a href="/categories/git/"> git </a>
+            </div>
+          <span class="more-meta"> 约 2923 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#基本概念">基本概念</a>
+<ul>
+<li><a href="#4个区">4个区</a></li>
+</ul></li>
+<li><a href="#基本操作">基本操作</a>
+<ul>
+<li><a href="#仓库初始化">仓库初始化</a></li>
+<li><a href="#查看仓库状态">查看仓库状态</a></li>
+<li><a href="#提交命令">提交命令</a></li>
+<li><a href="#查看提交日志">查看提交日志</a></li>
+<li><a href="#查看更改前后的差异">查看更改前后的差异</a></li>
+<li><a href="#删除文件">删除文件</a></li>
+<li><a href="#重命名">重命名</a></li>
+<li><a href="#git-add-n">git add -N</a></li>
+<li><a href="#git-add-p">git add -p</a></li>
+<li><a href="#git-checkout-p">git checkout -p</a></li>
+<li><a href="#压缩提交历史">压缩提交历史</a></li>
+<li><a href="#基于时间修改的指南">基于时间修改的指南</a></li>
+<li><a href="#全知的-reflog">全知的 reflog</a></li>
+</ul></li>
+<li><a href="#reference">Reference</a></li>
+<li><a href="#extended">Extended</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="/images/git-base.png" alt="" /></p>
+
+<h2 id="基本概念">基本概念</h2>
+
+<h3 id="4个区">4个区</h3>
+
+<p>如上图所示，git有4个区，和svn有很大的不同，git中引入了暂存区/缓存区(Stage/Index)的概念</p>
+
+<ul>
+<li>工作区(Workspace)</li>
+<li>暂存区(Stage/Index)</li>
+<li>本地仓库(Repository)</li>
+<li>远程仓库(Remote)</li>
+</ul>
+
+<p>在svn中我们都是直接将文件提交到版本仓库中去，而在git中，则多了一层关卡。</p>
+
+<blockquote>
+<p>工作区很好理解，就是我们能看到的工作目录，就是本地的文件夹。<br />
+工作区最原始的状态是未修改状态(Origin)，如果修改了某些文件就会变成已修改(Modified)。<br />
+我们要通过<code>git add</code>命令先将他们添加到暂存区中，这时就会产生已暂存(Staged)状态。<br />
+<code>git commit</code>命令则可以将暂存区中的文件提交到本地仓库中去，状态变为已提交(Committed)。<br />
+最后通过<code>git push</code>推送到远程仓库，推送成功状态变为已推送(Pushed)。</p>
+</blockquote>
+
+<h2 id="基本操作">基本操作</h2>
+
+<h3 id="仓库初始化">仓库初始化</h3>
+
+<p>仓库的初始化有两种方式：</p>
+
+<ul>
+<li>一种是直接从远程仓库克隆</li>
+<li>另一种则是直接从当前目录初始化</li>
+</ul>
+
+<p>从当前目录初始化的方式很简单，直接执行如下命令:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git init</code></pre></td></tr></table>
+</div>
+</div>
+<p>执行完成后当前目录下会多出一个.git的隐藏文件夹，所有git需要的数据和资源都存放在该目录中。</p>
+
+<p>然后正常的<code>add</code>和<code>commit</code>之后，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git remote add origin &lt;url&gt;
+$ git push -u origin master</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="查看仓库状态">查看仓库状态</h3>
+
+<p>可以通过<code>git status</code>命令来查看仓库中文件的状态。</p>
+
+<blockquote>
+<p><code>git status -s</code> : 文件状态的简写（M - 修改， A - 添加， D - 删除， R - 重命名，?? - 未追踪）。</p>
+</blockquote>
+
+<h3 id="提交命令">提交命令</h3>
+
+<ul>
+<li>一种是直接通过<code>git commit -m &quot;备注信息&quot;</code>命令</li>
+<li>如果要写的备注很多，可以通过<code>git commit</code>来打开指定编辑器，然后在编辑器中输入备注信息。</li>
+</ul>
+
+<blockquote>
+<p>在.gitconfig文件中 [core] 段中加上 editor=vim来修改git提交信息到编辑器为vim</p>
+</blockquote>
+
+<p><img src="/images/git-commit.jpg" alt="" /></p>
+
+<p>如图所示，在vim编辑器中按照既定的格式编辑内容，编辑完成后保存退出，此时文件就commit成功了。如果临时改变主意不想提交了，删除备注信息后保存退出，
+此时提交就会终止。</p>
+
+<p>提交成功之后，我们可以通过如下命令重新编辑上次提交的备注信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git commit --amend</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="查看提交日志">查看提交日志</h3>
+
+<p>我们可以使用 <code>git log</code> 命令来查看历史提交。<code>git log</code> 命令因为其后边参数的多样性，使用起来是比较灵活而强大的，并且比较实用。<br />
+下面列车一些常用的命令：</p>
+
+<ul>
+<li>使用<code>git log</code>命令我们可以查看以往仓库中提交的日志</li>
+<li>使用<code>git log --abbrev-commit</code>命令缩短版本号</li>
+<li>使用<code>git log --pretty=short</code>命令查询简略信息</li>
+<li>使用<code>git log --stat</code>命令查看简化版的diff日志信息</li>
+<li>使用<code>git log --name-only</code>命令仅在提交信息后显示已修改的文件清单</li>
+<li>使用<code>git log --name-status</code>命令显示新增、修改、删除的文件清单</li>
+<li>使用<code>git log --relative-date</code>命令显示较短的相对时间</li>
+<li>在<code>git log</code>后面加上文件名查看指定文件的提交日志，如果还想查看提交时文件的变化，加上-p参数即可。</li>
+<li>使用<code>git log -p -1</code>来查看最近一次提交的差异</li>
+<li>使用<code>git log --graph</code>命令可以让log以更直观的方式来展示</li>
+</ul>
+
+<blockquote>
+<p>我们还可以使用<code>git log --pretty</code>来定义显示格式，如：<code>git log --graph --pretty=format:&quot;%h - %an, %ar : %s&quot;</code>， &ndash;pretty=format:后边跟着的是格式化的字符串。
+其中 %h 表示简化版的Hash值， %an 表示作者名字（Author Name）, %ar 表示多久以前提交的，%s 则是提交信息。</p>
+</blockquote>
+
+<h3 id="查看更改前后的差异">查看更改前后的差异</h3>
+
+<p>已修改，未暂存</p>
+
+<blockquote>
+<p>使用<code>git diff</code>命令我们可以查看工作区和暂存区的差异。</p>
+</blockquote>
+
+<p>已暂存，未提交</p>
+
+<blockquote>
+<p>如果我们执行<code>git add .</code>把修改提交到暂存区，然后再执行<code>git diff</code>，你会发现没有任何信息输出。这说明<code>git diff</code>这个命令只检查我们的工作区和暂存区之间的差异。<br />
+如果我们想看到暂存区和本地仓库之间的差异，就需要加一个参数<code>git diff --cached</code>。<br />
+或者通过命令<code>git diff HEAD</code>来查看（实际上是工作区与当前分支最近一次commit之间的差异）。</p>
+</blockquote>
+
+<p>已提交，未推送</p>
+
+<blockquote>
+<p>现在，如果通过命令<code>git commit</code>把修改从暂存区提交到本地仓库，然后再执行git diff &ndash;cached，没有差异，执行<code>git diff master origin/master</code>，可以看到差异</p>
+</blockquote>
+
+<h3 id="删除文件">删除文件</h3>
+
+<p>当我们需要删除工作区和暂存区上的文件，可以执行<code>git rm &lt;filename&gt;</code>命令，该命令等同于以下两个命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">//直接在文件管理器中把文件删了
+$ rm file
+//提交到工作区
+$ git add file //或者 git rm file</code></pre></td></tr></table>
+</div>
+</div>
+<p>当我们希望某个文件不被版本控制，但是本地又需要使用，可以使用<code>git rm --cached &lt;filename&gt;</code>。</p>
+
+<h3 id="重命名">重命名</h3>
+
+<p>可以通过<code>git mv &lt;SourceFile&gt; &lt;RenameFile&gt;</code>命令将SourceFile重命名为RenameFile，该命令等同于以下三个命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ mv SourceFile RenameFile
+$ git rm SourceFile
+$ git add RenameFile</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="git-add-n">git add -N</h3>
+
+<p>你可以用<code>git add -N &lt;filename&gt;</code>（“通知”）来告诉Git你想把新添加的文件包含在提交中在你第一次实际提交之前，使用该命令之后执行<code>git diff</code>命令就可以查看到更改。</p>
+
+<h3 id="git-add-p">git add -p</h3>
+
+<p>交互式提交，询问你是否愿意将它提交，跳过，或者推迟决定（还有其他一些更强大的选项，你可以通过在运行这命令后选择？来查看）。<code>git add -p</code>是一个神奇的工具来生产结构良好的提交。</p>
+
+<h3 id="git-checkout-p">git checkout -p</h3>
+
+<p>与<code>git add -p</code>类似，<code>git checkout</code>命令将使用 <code>--patch</code> 或 <code>-p</code> 选项，这会使 git 在本地工作副本中展示每个“大块”的改动，并允许丢弃对应改动 —— 简单地说就是恢复本地工作副本到你改变之前的状态。</p>
+
+<h3 id="压缩提交历史">压缩提交历史</h3>
+
+<p><code>git rebase -i</code>命令可以实现提交历史的压缩。比如我们在开发某一个功能时，提交了很多次，当所有功能都写完时，想将这些提交压缩为一个，就可以使用该命令。</p>
+
+<p>如：通过执行<code>git rebase -i HEAD~2</code>命令来压缩前两个版本的提交历史，会自动打开一个vim编辑器，压缩之后，最新一次的提交日志就没了，但是数据还在。</p>
+
+<h3 id="基于时间修改的指南">基于时间修改的指南</h3>
+
+<p>这个功能在某些时候会变得十分有用，比如当你处理最新出现的 bug，自言自语道：“这个功能明明昨天还是好好的，到底又改了些什么”，不用盯着满屏的 git 日志的输出试图弄清楚什么时候更改了提交，您只需运行<code>git diff HEAD@{yesterday}</code>，会看到从昨天以来的所有修改，这也适用于较长的时间段（例如 <code>git diff HEAD@{'2 months ago'}</code>） ，以及一个确切的日期（例如<code>git diff HEAD@{'2010-01-01 12:00:00'}</code>）。</p>
+
+<p>您还可以将这些基于日期的修改参数与使用修正参数的任何 Git 子命令一起使用。在 gitrevisions 手册页中有关于具体使用哪种格式的详细信息。</p>
+
+<h3 id="全知的-reflog">全知的 reflog</h3>
+
+<p>你是不是试过在 rebase 时干掉过某次提交，后来又发现你需要保留这次提交的一些东西？你可能觉得这些提交的东西已经永远找不回来了，只能从头再来了。其实不然，但如果你在本地工作副本中提交了，提交就会进入到 &ldquo;引用日志&rdquo; ，你仍然可以访问到。</p>
+
+<p>运行 git reflog 将在本地工作副本中显示当前分支的所有活动的列表，并为您提供每个提交的 SHA1 值。一旦发现你 rebase 时放弃的那个提交，你可以运行 git checkout <SHA1> 来检出该次提交，复制好你需要的信息，然后再运行 git checkout HEAD 返回到分支最新的提交去。</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/S1T4wy3srmLvXgIjvpVEwg" target="_blank">https://mp.weixin.qq.com/s/S1T4wy3srmLvXgIjvpVEwg</a></li>
+<li><a href="https://opensource.com/article/18/4/git-tips" target="_blank">https://opensource.com/article/18/4/git-tips</a></li>
+</ul>
+
+<h2 id="extended">Extended</h2>
+
+<ul>
+<li><a href="https://segmentfault.com/a/1190000011972502" target="_blank">Git关联远程仓库</a></li>
+<li><a href="https://segmentfault.com/a/1190000011979949" target="_blank">Git工作区储藏兼谈分支管理中的一个小问题</a></li>
+<li><a href="https://segmentfault.com/a/1190000011995630" target="_blank">Git标签管理</a></li>
+<li><a href="https://blog.csdn.net/wzwdcld/article/details/80782561" target="_blank">git生成ssh key 避免每次push都要输入账号密码</a></li>
+<li><a href="https://www.jianshu.com/p/471c9537f45a" target="_blank">你可能不知道的关于 Git stash 的技巧</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">starifly</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-09-08
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">git</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/git-reset/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Git的撤销更改</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/git-add-difference/">
+            <span class="next-text nav-default">git add -A 和 git add . 的区别</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-25 22:16:03 \x2b0800 \x2b0800',
+        title: 'Git基本操作',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>markdown on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/markdown/</link>
+    <description>Recent content in markdown on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 15 Aug 2018 22:31:38 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>为 Markdown 生成 TOC 的 Vim 插件</title>
+      <link>http://starifly.github.io/post/vim-markdown-toc/</link>
+      <pubDate>Wed, 15 Aug 2018 22:31:38 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/vim-markdown-toc/</guid>
+      <description>因为饱受 GFM 和 Redcarpet 两种 Markdown 引擎生成 TOC 链接的差异的折磨，而我又不得不同时使用它们——博客基于 Jekyll 使用 Redcarpet（*Update 2016/09/16: GitHub Pages 现在已经改</description>
+    </item>
+    
+    <item>
+      <title>关于 Markdown 的一些奇技淫巧</title>
+      <link>http://starifly.github.io/post/markdown-odd-skills/</link>
+      <pubDate>Wed, 15 Aug 2018 15:35:40 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/markdown-odd-skills/</guid>
+      <description>&lt;p&gt;自从几年前开始在 GitHub 玩耍，接触到 Markdown 之后，就一发不可收拾，在各种文档编辑上，有条件用 Markdown 的尽量用，不能用的创造条件也要用——README、博客、公众号、接口文档等等全都是，比如当前这篇文章就是用 Markdown 编辑而成。&lt;/p&gt;
+
+&lt;p&gt;这几年也发现越来越多的网站和程序提供了对 Markdown 的支持，从最初接触的 GitHub、Jekyll，到简书、掘金、CSDN 等等，由此也从别人做得好的文档中，学到了一些『奇技淫巧』，所以本文不是对 Markdown 基础语法的介绍，而是一些相对高级、能将 Markdown 玩出更多花样的小技巧。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;注：如下技巧大多是利用 Markdown 兼容部分 HTML 标签的特性来完成，不一定在所有网站和软件里都完全支持，主要以 GitHub 支持为准。&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Vim Tips - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="starifly" /><meta name="description" content="Vim Tips.
+" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/vim-tips/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Vim Tips" />
+<meta property="og:description" content="Vim Tips." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/vim-tips/" />
+<meta property="article:published_time" content="2018-08-17T21:15:03+08:00" />
+<meta property="article:modified_time" content="2018-08-20T00:00:00+00:00" />
+<meta itemprop="name" content="Vim Tips">
+<meta itemprop="description" content="Vim Tips.">
+
+
+<meta itemprop="datePublished" content="2018-08-17T21:15:03&#43;08:00" />
+<meta itemprop="dateModified" content="2018-08-20T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1067">
+
+
+
+<meta itemprop="keywords" content="vim,tips," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vim Tips"/>
+<meta name="twitter:description" content="Vim Tips."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Vim Tips</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-17 </span>
+        <div class="post-category">
+            <a href="/categories/vim/"> vim </a>
+            </div>
+          <span class="more-meta"> 约 1067 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#general">General</a></li>
+<li><a href="#jump">Jump</a></li>
+<li><a href="#pattern">Pattern</a></li>
+<li><a href="#buffer">Buffer</a></li>
+<li><a href="#file">File</a></li>
+<li><a href="#object">Object</a></li>
+<li><a href="#modify">Modify</a></li>
+<li><a href="#replace">Replace</a></li>
+<li><a href="#相对屏幕移动">相对屏幕移动</a></li>
+<li><a href="#others">Others</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Vim Tips.</p>
+
+<style>
+/* 第一列表格宽度 */
+table th:nth-of-type(1){
+width: 25%;
+}
+</style>
+
+<h2 id="general">General</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>i</td>
+<td>光标前</td>
+</tr>
+
+<tr>
+<td>a</td>
+<td>光标后</td>
+</tr>
+
+<tr>
+<td>I</td>
+<td>行首</td>
+</tr>
+
+<tr>
+<td>A</td>
+<td>行尾</td>
+</tr>
+
+<tr>
+<td>x</td>
+<td>删除光标所在字符</td>
+</tr>
+
+<tr>
+<td>D</td>
+<td>删除从当前光标到本行末尾的字符</td>
+</tr>
+
+<tr>
+<td>r</td>
+<td>替换光标处的字符</td>
+</tr>
+
+<tr>
+<td>U</td>
+<td>取消当前行中所有的改动</td>
+</tr>
+
+<tr>
+<td>=</td>
+<td>自动缩进</td>
+</tr>
+
+<tr>
+<td>.</td>
+<td>(点)会重做最后一个命令</td>
+</tr>
+
+<tr>
+<td>V</td>
+<td>按行选择</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="jump">Jump</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>跳到第一列</td>
+</tr>
+
+<tr>
+<td>^</td>
+<td>跳到本行第一个非空字符</td>
+</tr>
+
+<tr>
+<td>$</td>
+<td>跳到本行末尾</td>
+</tr>
+
+<tr>
+<td>g_</td>
+<td>跳到本行最后一个非空字符</td>
+</tr>
+
+<tr>
+<td>w</td>
+<td>跳到下一个单词的开头</td>
+</tr>
+
+<tr>
+<td>e</td>
+<td>跳到这个单词的末尾</td>
+</tr>
+
+<tr>
+<td>W</td>
+<td>跳到下一个由空格分隔的单词的开头</td>
+</tr>
+
+<tr>
+<td>E</td>
+<td>跳到这个由空格分隔的单词的末尾</td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>跳到当前光标的下一个相同单词的地方</td>
+</tr>
+
+<tr>
+<td>#</td>
+<td>跳到当前光标的上一个相同单词的地方</td>
+</tr>
+
+<tr>
+<td>`.</td>
+<td>返回最后一次编辑位置</td>
+</tr>
+
+<tr>
+<td>[[</td>
+<td>到函数头</td>
+</tr>
+
+<tr>
+<td>[{</td>
+<td>到块开始位置</td>
+</tr>
+
+<tr>
+<td>]}</td>
+<td>到块结束位置</td>
+</tr>
+
+<tr>
+<td>gf</td>
+<td>打开以光标所在字符串为文件名的文件</td>
+</tr>
+
+<tr>
+<td>gd</td>
+<td>跳转到局部变量的定义处</td>
+</tr>
+
+<tr>
+<td>gD</td>
+<td>跳转到全局变量的定义处，从当前文件开头开始搜索</td>
+</tr>
+
+<tr>
+<td>g]</td>
+<td>展示匹配tags的文件</td>
+</tr>
+
+<tr>
+<td><Ctrl> E</td>
+<td>INSERT 模式下移动光标到行尾</td>
+</tr>
+
+<tr>
+<td><Ctrl> B</td>
+<td>INSERT 模式下光标左移一位</td>
+</tr>
+
+<tr>
+<td>ctrl+w-f</td>
+<td>同gf，不过会水平分割一个窗口</td>
+</tr>
+
+<tr>
+<td>ctrl-^</td>
+<td>跳转到上一个编辑的文件</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="pattern">Pattern</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>:/ pattern<CR></td>
+<td>单词前加空格，精确匹配</td>
+</tr>
+
+<tr>
+<td>:/^pattern<CR></td>
+<td>搜索仅在行首出现</td>
+</tr>
+
+<tr>
+<td>:/pattern$<CR></td>
+<td>搜索仅在行末出现</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="buffer">Buffer</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>:5,10bd</td>
+<td>删除编号5到10的buffer</td>
+</tr>
+
+<tr>
+<td>:ba</td>
+<td>把所有缓冲区在当前页中</td>
+</tr>
+
+<tr>
+<td>:sb 3</td>
+<td>分屏打开编号为3的buffer</td>
+</tr>
+
+<tr>
+<td>:vertical sb 3</td>
+<td>同上，垂直分屏</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="file">File</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>:1,10 w outfile</td>
+<td>1到10行内容写到outfile</td>
+</tr>
+
+<tr>
+<td>:1,10 w &gt;&gt; outfile</td>
+<td>1到10行内容追加到outfile</td>
+</tr>
+
+<tr>
+<td>:r infile</td>
+<td>插入文件内容</td>
+</tr>
+
+<tr>
+<td>:23r infile</td>
+<td>插入文件23行的内容</td>
+</tr>
+
+<tr>
+<td>:e#或ctrl+^</td>
+<td>回到刚才编辑的文件9（貌似只有:e#有效）</td>
+</tr>
+
+<tr>
+<td>:f或ctrl+g</td>
+<td>显示文件是否被修改</td>
+</tr>
+
+<tr>
+<td>:f filename</td>
+<td>改变编辑的文件名</td>
+</tr>
+
+<tr>
+<td>:e!</td>
+<td>强制回到文件原始状态</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="object">Object</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>dip</td>
+<td>删除所有临近的空白行</td>
+</tr>
+
+<tr>
+<td>cab</td>
+<td>等同于ca)</td>
+</tr>
+
+<tr>
+<td>yiB</td>
+<td>等同于yi}</td>
+</tr>
+
+<tr>
+<td>cw</td>
+<td>替换从光标到单词结束</td>
+</tr>
+
+<tr>
+<td>dib</td>
+<td>删除括号内的内容</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="modify">Modify</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>c[n]l</td>
+<td>改写光标后n个字母</td>
+</tr>
+
+<tr>
+<td>c[n]h</td>
+<td>改写光标前n个字母</td>
+</tr>
+
+<tr>
+<td>[n]cc</td>
+<td>修改当前n行</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="replace">Replace</h2>
+
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>:s/old/new</td>
+<td>用new替换行中首次出现的old</td>
+</tr>
+
+<tr>
+<td>:s/old/new/g</td>
+<td>用new替换行中所有出现的old</td>
+</tr>
+
+<tr>
+<td>:#,# s/old/new/g</td>
+<td>用new替换从第＃行到第＃行中出现的old</td>
+</tr>
+
+<tr>
+<td>:% s/old/new/g</td>
+<td>用new替换整篇中出现的old</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>如果替换的范围较大时，在所有的命令尾加一个c命令，强制每个替换需要用户进行确认，例如:s/old/new/c 或s/old/new/gc</li>
+</ul>
+
+<h2 id="相对屏幕移动">相对屏幕移动</h2>
+
+<ul>
+<li>通过c-f向下翻页，c-b向上翻页；c-e逐行下滚，c-y逐行上滚。这在几乎所有Unix软件中都是好使的，比如man和less。 H可以移动到屏幕的首行，L到屏幕尾行，M到屏幕中间。</li>
+</ul>
+
+<h2 id="others">Others</h2>
+
+<ul>
+<li>30i+<esc> — 插入30个+组成的分割线</li>
+<li>ctrl+v 下移 I // Esc</li>
+<li>zt可以置顶当前行，通常用来查看完整的下文，比如函数、类的定义。 zz将当前行移到屏幕中部，zb移到底部。</li>
+<li>:packadd termdebug，然后Termdebug 可执行程序名字可在vim里启用GDB<sup class="footnote-ref" id="fnref:footnote"><a href="#fn:footnote">1</a></sup>。</li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:footnote">需要vim版本8.1以上
+ <a class="footnote-return" href="#fnref:footnote"><sup>[return]</sup></a></li>
+</ol>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">starifly</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-08-20
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vim/">vim</a>
+          <a href="/tags/tips/">tips</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hugo-deploy-script/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Hugo 自动化部署脚本</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/a-promising-cross-compile-framework/">
+            <span class="next-text nav-default">一套交叉编译脚本</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-17 21:15:03 \x2b0800 \x2b0800',
+        title: 'Vim Tips',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

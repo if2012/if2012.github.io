@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>音视频 on starifly&#39;s Blog</title>
+    <link>http://starifly.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/</link>
+    <description>Recent content in 音视频 on starifly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 16 Aug 2018 18:31:24 +0800</lastBuildDate>
+    
+	<atom:link href="http://starifly.github.io/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用flv.js做直播</title>
+      <link>http://starifly.github.io/post/live-streaming-with-flv/</link>
+      <pubDate>Thu, 16 Aug 2018 18:31:24 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/live-streaming-with-flv/</guid>
+      <description>&lt;p&gt;为什么要在这个时候探索flv.js做直播呢？原因在于各大浏览器厂商已经默认禁用Flash，之前常见的Flash直播方案需要用户同意使用Flash后才可以正常使用直播功能，这样的用户体验很致命。&lt;/p&gt;
+
+&lt;p&gt;在介绍flv.js之前先介绍下常见的直播协议以及给出我对它们的延迟与性能所做的测试得出的数据。
+如果你看的很吃力可以先了解下音视频技术的一些&lt;a href=&#34;https://github.com/gwuhaolin/blog/issues/5&#34; target=&#34;_blank&#34;&gt;基础概念&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>音视频技术参考资料</title>
+      <link>http://starifly.github.io/post/audio-video-tech-references/</link>
+      <pubDate>Thu, 16 Aug 2018 11:41:15 +0800</pubDate>
+      
+      <guid>http://starifly.github.io/post/audio-video-tech-references/</guid>
+      <description>&lt;h2 id=&#34;入门与概念&#34;&gt;入门与概念&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020/article/details/18893769&#34; target=&#34;_blank&#34;&gt;[总结]视音频编解码技术零基础学习方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ruoxu.me/yin-shi-pin-qi-fa&#34; target=&#34;_blank&#34;&gt;入门启发：音视频的简单理解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wuyuans.com/2012/01/video_encode_frame&#34; target=&#34;_blank&#34;&gt;视频编码基础&amp;ndash;帧的类型&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;容器格式&#34;&gt;容器格式&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/leixiaohua1020/article/details/17934487&#34; target=&#34;_blank&#34;&gt;视音频编解码学习工程：FLV封装格式分析器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;传输协议&#34;&gt;传输协议&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://chenlichao.gitbooks.io/rtmp-zh_cn/content/1-introduction.html&#34; target=&#34;_blank&#34;&gt;RTMP协议规范&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://mingyangshang.github.io/2016/03/06/RTMP协议/&#34; target=&#34;_blank&#34;&gt;带你吃透RTMP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.csdn.net/win_lin/article/details/12615591&#34; target=&#34;_blank&#34;&gt;RTMP服务器的延迟，多级边缘不影响延迟，gop为最大因素&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;编解码&#34;&gt;编解码&lt;/h2&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

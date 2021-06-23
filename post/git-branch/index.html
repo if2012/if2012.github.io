@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Git分支管理 - starifly&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="starifly" /><meta name="description" content="git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。" /><meta name="keywords" content="技术, 生活" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.56.3 with theme even" />
+
+
+<link rel="canonical" href="http://starifly.github.io/post/git-branch/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Git分支管理" />
+<meta property="og:description" content="git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://starifly.github.io/post/git-branch/" />
+<meta property="article:published_time" content="2018-08-30T21:48:45+08:00" />
+<meta property="article:modified_time" content="2018-09-02T00:00:00+00:00" />
+<meta itemprop="name" content="Git分支管理">
+<meta itemprop="description" content="git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。">
+
+
+<meta itemprop="datePublished" content="2018-08-30T21:48:45&#43;08:00" />
+<meta itemprop="dateModified" content="2018-09-02T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3221">
+
+
+
+<meta itemprop="keywords" content="git," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git分支管理"/>
+<meta name="twitter:description" content="git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">starifly</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/daily-notes/">
+        <li class="mobile-menu-item">记录</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">starifly</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/daily-notes/">记录</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Git分支管理</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-30 </span>
+        <div class="post-category">
+            <a href="/categories/git/"> git </a>
+            </div>
+          <span class="more-meta"> 约 3221 字 </span>
+          <span class="more-meta"> 预计阅读 7 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#查看分支">查看分支</a></li>
+<li><a href="#分支创建和切换">分支创建和切换</a></li>
+<li><a href="#分支合并">分支合并</a></li>
+<li><a href="#分支衍合">分支衍合</a></li>
+<li><a href="#分支的推送和拉取">分支的推送和拉取</a></li>
+<li><a href="#分支的删除">分支的删除</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>git的分支管理十分强大，本文主要涉及git中分支的查看和最基本的分支管理操作，主要包括分支的创建、切换、合并、衍合以及分支的推送和拉取等。同时还介绍了如何删除本地分支以及远程分支。</p>
+
+<p>阅读前面的博文有助于理解本文：</p>
+
+<ol>
+<li>《<a href="https://starifly.github.io/post/git-base/" target="_blank">Git基本操作</a>》</li>
+<li>《<a href="https://starifly.github.io/post/git-reset/" target="_blank">Git的撤销更改</a>》</li>
+</ol>
+
+<h2 id="查看分支">查看分支</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">//查看当前仓库的分支，分支前的*表示当前所处的分支
+$ git branch
+
+//查看远程仓库的分支
+$ git branch -r
+
+//查看所有分支
+$ git branch -a
+
+//查看所有分支和该分支上最后的一次提交
+$ git branch -v
+
+//查看已经合入当前分支的所有分支
+$ git branch --merged
+
+//查看未被合入分支
+$ git branch --no-merged
+
+//查看当前分支对应的远程分支（追踪关系）
+$ git branch -vv
+
+//可视化目前的分支状态
+$ git log --oneline --graph --all</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="分支创建和切换">分支创建和切换</h2>
+
+<p>我们可以使用<code>git branch &lt;分支名&gt;</code>命令来创建一个分支，然后使用<code>git checkout &lt;分支名&gt;</code>来切换分支。</p>
+
+<p>如果觉得麻烦，我们可以使用一个简便的命令创建并切换到该分支上：<code>git checkout -b &lt;分支名&gt;</code>。</p>
+
+<blockquote>
+<p>也可以使用<code>git checkout -</code>命令来切换回上一个分支</p>
+</blockquote>
+
+<h2 id="分支合并">分支合并</h2>
+
+<p>假设当前仓库存在两个分支，我们先切换到master分支，然后通过<code>git merge --no-ff &lt;分支名&gt;</code>命令将分支合并到master分支上。</p>
+
+<p>其中<code>--no-ff</code>表示强行关闭fast-forward方式，fast-forward方式表示当条件允许时，git直接把HEAD指针指向合并分支的头，完成合并，这种方式合并速度快，但是在整个过程中没有创建commit，所以如果当我们删除掉这个分支时就再也找不回来了，因此在这里我们将之关闭。</p>
+
+<p>如果<code>git merge</code>合并分支时出现冲突，先重新编辑冲突文件，编辑完成之后，再执行<code>git add</code>和<code>git commit</code>即可。</p>
+
+<h2 id="分支衍合">分支衍合</h2>
+
+<p>衍合（rebase）又称变基，其实也是分支合并的一种方式，既然也是合并，那它跟上文讲的合并（merge）有什么区别呢？</p>
+
+<p>假如我们现在有master和experiment两条分支：</p>
+
+<p><img src="https://git-scm.com/book/en/v2/images/basic-rebase-1.png" alt="" /></p>
+
+<p>现在想把experiment分支合并到master分支上来，最容易的方法是 <code>merge</code> 命令。它会把两个分支的最新快照（C3 和 C4）以及二者最近的共同祖先（C2）进行三方比较合并，合并的结果是生成一个新的快照（并提交）。</p>
+
+<p><img src="https://git-scm.com/book/en/v2/images/basic-rebase-2.png" alt="" /></p>
+
+<p>其实，还有一种方法：你可以提取在 （C4）中引入的补丁和修改，然后在（C3）的基础上应用一次。 在git中，这种操作就叫做变基。 你可以使用 <code>rebase</code> 命令将提交到某一分支上的所有修改都移至另一分支上，就好像“重新播放”一样。</p>
+
+<p>具体做法：</p>
+
+<p>1.检出experiment分支，对master进行衍合</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git checkout experiment
+$ git rebase master</code></pre></td></tr></table>
+</div>
+</div>
+<p>它的原理是首先找到这两个分支（即当前分支 experiment、变基操作的目标基底分支 master）的最近共同祖先（C2），然后对比当前分支相对于该祖先的历次提交，提取相应的修改并存为临时文件，然后将当前分支指向目标基底（C3）, 最后以此将之前另存为临时文件的修改依序应用。</p>
+
+<p><img src="https://git-scm.com/book/en/v2/images/basic-rebase-3.png" alt="" /></p>
+
+<p>可以看出，在衍合得过程中，experiment分支会丢弃现有的提交（C4），然后相应地新建一些内容一样但实际上不同的提交（C4’）。</p>
+
+<p>2.再回到master分支，进行一次快进合并</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git checkout master
+$ git merge experiment</code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="https://git-scm.com/book/en/v2/images/basic-rebase-4.png" alt="" /></p>
+
+<p>在衍合过程中有可能会发生冲突，方案有两种：一种是通过<code>git rebase --abort</code>命令直接退回到之前的状态，另一种就是解决冲突继续合并。</p>
+
+<p>解决冲突后，要<code>git add</code>冲突的文件，标识冲突解决，然后再执行<code>git rebase --continue</code>，注意<code>git add</code>后不要执行<code>git commit</code>。</p>
+
+<h2 id="分支的推送和拉取">分支的推送和拉取</h2>
+
+<p>git push与git pull是一对推送/拉取分支的git命令。<br />
+<strong>git push 使用本地的对应分支来更新对应的远程分支。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果省略远程分支名，则表示将本地分支推送与之存在”追踪关系”的远程分支(通常两者同名)，如果该远程分支不存在，则会被新建。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push origin master</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令表示，将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建。</p>
+
+<p>如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支，这条命令是删除远程master分支。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push origin :&lt;分支名&gt;
+//等同于
+git push origin --delete &lt;分支名&gt;</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果当前分支与远程分支之间存在追踪关系（即分支名相同），则本地分支和远程分支都可以省略。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push origin</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令表示，将当前分支推送到origin主机的对应分支。</p>
+
+<p>如果当前分支只有一个追踪分支，那么主机名都可以省略。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用<code>git push</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push -u origin master</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用<code>git push</code>了。</p>
+
+<p>不带任何参数的<code>git push</code>，默认只推送当前分支，这叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用matching方法，现在改为默认采用simple方式。如果要修改这个设置，可以采用<code>git config</code>命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git config --global push.default matching
+//或者
+$ git config --global push.default simple</code></pre></td></tr></table>
+</div>
+</div>
+<p>更详细的push.default属性，请参考《<a href="https://segmentfault.com/a/1190000002783245" target="_blank">Git push与pull的默认行为</a>》</p>
+
+<p>还有一种情况，就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要使用–all选项。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git push --all origin</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令表示，将所有本地分支都推送到origin主机。</p>
+
+<p><strong>git pull 取回远程主机某个分支的更新，再与本地的指定分支合并。</strong></p>
+
+<p><code>git pull</code>与<code>git push</code>操作的目的相同，但是操作的目标相反。命令格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</code></pre></td></tr></table>
+</div>
+</div>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">git pull origin master:my-test</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面的命令是将origin厂库的master分支拉取并合并到本地的my-test分支上。</p>
+
+<p>如果省略本地分支，则将自动合并到当前所在分支上。如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">git pull origin master</code></pre></td></tr></table>
+</div>
+</div>
+<p>在某些场合，git会自动在本地分支与远程分支之间，建立一种追踪关系(tracking)。比如，在<code>git clone</code>的时候，所有本地分支默认与远程主机的同名分支，建立追踪关系，也就是说，本地的master分支自动”追踪”origin/master分支。</p>
+
+<p>以下也能自动建立追踪关系：<br />
+1. 检出时：<code>git checkout -b master origin/master</code><br />
+2. 推送时：<code>git push -u origin &lt;远程分支名&gt;</code>或<code>git push --set-upstream origin &lt;远程分支名&gt;</code></p>
+
+<blockquote>
+<p>注意，上述使用的前提：</p>
+
+<ul>
+<li>检出的本地分支必须和远程分支同名才能自动建立追踪关系<br /></li>
+<li>推送时，如果远程没有同名关联分支，则会推送失败。</li>
+</ul>
+</blockquote>
+
+<p>git也允许手动建立追踪关系。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git branch --set-upstream master origin/next</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令指定master分支追踪origin/next分支。</p>
+
+<p>如果当前分支与远程分支存在追踪关系，<code>git pull</code>就可以省略远程分支名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git pull origin</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令表示，本地的当前分支自动与对应的origin主机”追踪分支”(remote-tracking branch)进行合并。</p>
+
+<p>如果当前分支只有一个追踪分支，连远程主机名都可以省略。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git pull</code></pre></td></tr></table>
+</div>
+</div>
+<p>上面命令表示，当前分支自动与唯一一个追踪分支进行合并。</p>
+
+<p>如果合并需要采用rebase模式，可以使用<code>--rebase</code>选项。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ git pull --rebase &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="分支的删除">分支的删除</h2>
+
+<p>有时候当我们完成功能等分支的开发时，我们会把它合并到上一层分支，此时我们不再需要这个功能分支了，我们可以通过<code>git branch -d &lt;分支名&gt;</code>来删除它。</p>
+
+<p>实际上，对分支的删除只是删除的指向该commit号的指针，并不会删除其相关的提交号, 在日志中仍然可以找到之前的commit记录，也仍然可以在该commit上创建新的分支。</p>
+
+<p>如果你还想删除远程分支，要使用<code>git push origin --delete &lt;分支名&gt;</code></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://segmentfault.com/a/1190000011927868#articleHeader5" target="_blank">https://segmentfault.com/a/1190000011927868#articleHeader5</a></li>
+<li><a href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA" target="_blank">https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA</a></li>
+<li><a href="https://www.yiibai.com/git/git_push.html#article-start" target="_blank">https://www.yiibai.com/git/git_push.html#article-start</a></li>
+<li><a href="https://www.yiibai.com/git/git_pull.html" target="_blank">https://www.yiibai.com/git/git_pull.html</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">starifly</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-09-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">git</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/a-c-coroutine/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">一个“蝇量级” C 语言协程库</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/git-reset/">
+            <span class="next-text nav-default">Git的撤销更改</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2018-08-30 21:48:45 \x2b0800 \x2b0800',
+        title: 'Git分支管理',
+        clientID: '86a50afbfb84641ef817',
+        clientSecret: 'a11b47cf82383c6451ee60b182f814aafdf513c3',
+        repo: 'blog-comments',
+        owner: 'if2O12',
+        admin: ['if2O12'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/starifly" class="iconfont icon-github" title="github"></a>
+  <a href="http://starifly.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">starifly</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
